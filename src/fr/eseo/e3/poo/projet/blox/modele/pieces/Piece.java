@@ -1,0 +1,30 @@
+package fr.eseo.e3.poo.projet.blox.modele.pieces;
+
+import fr.eseo.e3.poo.projet.blox.modele.Element;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+
+public interface Piece {
+    /**
+     * Elements des pieces
+     */
+    public Element[] getElements();
+
+    /**
+     * Methode permettant de déplacer les piece
+     * @param abscisse abscisse
+     * @param ordonnee ordonnee
+     */
+    public void setPosition(int abscisse, int ordonnee);
+
+    /**
+     * Methode permettant de récupérer le puits
+     * @return le puits du jeu
+     */
+    public Puits getPuits();
+
+    /**
+     * Methode permettant de placer les elements de la piece
+     * @param puits liste d'éléments
+     */
+    public void setPuits(Puits puits);
+}
