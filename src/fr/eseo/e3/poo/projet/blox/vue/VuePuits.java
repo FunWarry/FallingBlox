@@ -6,8 +6,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Color;
+import javax.swing.JPanel;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
-public class VuePuits extends javax.swing.JPanel {
+public class VuePuits extends JPanel implements PropertyChangeListener {
     /**
      * puit a afficher
      */
@@ -22,6 +25,11 @@ public class VuePuits extends javax.swing.JPanel {
      * taille du puit
      */
     private int taille;
+
+    /**
+     * VuePiece
+     */
+    private VuePiece vuePiece;
 
     /**
      * Constructeur de la classe VuePuits
@@ -39,6 +47,9 @@ public class VuePuits extends javax.swing.JPanel {
         this.puits = puits;
         this.taille = taille;
         super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(), taille*this.puits.getProfondeur()));
+
+        // On ajoute un écouteur sur le puits
+        this.puits.addPropertyChangeListener(this);
     }
 
     /**
@@ -54,8 +65,14 @@ public class VuePuits extends javax.swing.JPanel {
      * @param puits le puit
      */
     public void setPuits(Puits puits) {
+        this.puits.removePropertyChangeListener(this);
+
         this.puits = puits;
+
+        this.puits.addPropertyChangeListener(this);
+
         super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(), taille*this.puits.getProfondeur()));
+
     }
 
     /**
@@ -75,7 +92,26 @@ public class VuePuits extends javax.swing.JPanel {
         super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(), taille*this.puits.getProfondeur()));
     }
 
+    /**
+     * Methode permettant de recuperer la vuePiece
+     * @return la vuePiece
+     */
+    public VuePiece getVuePiece() {
+        return this.vuePiece;
+    }
 
+    /**
+     * Methode permettant de definir la vuePiece
+     * @param vuePiece la vuePiece
+     */
+    private void setVuePiece(VuePiece vuePiece) {
+        this.vuePiece = vuePiece;
+    }
+
+    /**
+     * Methode permettant de dessiner le puit
+     * @param g objet graphique
+     */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         /* appel vers super pour remplir le fond du JPanel */
@@ -94,9 +130,20 @@ public class VuePuits extends javax.swing.JPanel {
         for(int i=0; i < puits.getProfondeur() + 1; i++) {
             g2D.drawLine(0, taille*i, this.taille*this.puits.getLargeur(), taille*i);
         }
+
+        if(this.vuePiece != null) {
+            this.vuePiece.afficherPiece(g2D);
+        }
         /* Nous utiliserons l'instance de Graphics2D*/
         /*Puis nous liberons la memoire*/
         g2D.dispose();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent event) {
+        if(event.getPropertyName().equals(Puits.MODIFICATION_PIECE_ACTUELLE)) {
+            this.setVuePiece(new VuePiece(this.puits.getPieceActuelle(), this.taille));
+        }
     }
 
 }

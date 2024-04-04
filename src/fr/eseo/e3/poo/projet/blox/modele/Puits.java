@@ -8,6 +8,8 @@ import java.util.concurrent.Executor;
 public class Puits {
     private Tas tas;
 
+    private java.beans.PropertyChangeSupport pcs;
+
     /**
      * piceActuelle
      */
@@ -35,6 +37,12 @@ public class Puits {
     private int profondeur;
 
     /**
+     * Constante de classe pour identifier qu'une piece a ete modifiée
+     */
+    public static final String MODIFICATION_PIECE_ACTUELLE = "";
+    public static final String MODIFICATION_PIECE_SUIVANTE = "";
+
+    /**
      * Constructeur de la classe Puits
      */
     public Puits(){
@@ -49,6 +57,7 @@ public class Puits {
     public Puits(int largeur, int profondeur) {
         setLargeur(largeur);
         setProfondeur(profondeur);
+        pcs = new java.beans.PropertyChangeSupport(this);
     }
 
     /**
@@ -72,12 +81,14 @@ public class Puits {
      * @param pieceSuivante la piece suivante
      */
     public void setPieceSuivante(Piece pieceSuivante) {
+        pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, this.pieceActuelle, this.pieceSuivante);
         this.pieceActuelle = this.pieceSuivante;
         try {
             this.pieceActuelle.setPosition(largeur / 2, - 4);
         } catch (NullPointerException e) {
             this.pieceActuelle = null;
         }
+        pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, this.pieceSuivante, pieceSuivante);
         this.pieceSuivante = pieceSuivante;
     }
 
@@ -144,4 +155,21 @@ public class Puits {
         }
         return puits;
     }
+
+    /**
+     * Methode permettant d'ajouter un listener
+     * @param listener
+     */
+    public void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+
+    /**
+     * Methode permettant de supprimer un listener
+     * @param listener
+     */
+    public void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(listener);
+    }
+
 }

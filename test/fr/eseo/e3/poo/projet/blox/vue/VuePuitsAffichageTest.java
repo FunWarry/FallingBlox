@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.UsineDePiece;
 
 import javax.swing.*;
 
@@ -12,25 +13,35 @@ public class VuePuitsAffichageTest {
     }
 
     private void testConstructeurPuits () {
-        Puits puits = new Puits();
+        VuePuits vuePuits = new VuePuits(new Puits());
+
+        vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());
+        vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());
+
         JFrame fenetre = new JFrame("Puits");
+
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenetre.setSize(300, 400);
         fenetre.setLocationRelativeTo(null);
 
-        fenetre.add(new VuePuits(puits));
+        fenetre.add(vuePuits);
 
         fenetre.setVisible(true);
     }
 
     private void testConstructeurPuitsTaille() {
-        Puits puits = new Puits();
+        VuePuits vuePuits = new VuePuits(new Puits(), 20);
+
+        vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());
+        vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());
+
         JFrame fenetre = new JFrame("Puits et taille");
+
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenetre.setSize(300, 400);
         fenetre.setLocationRelativeTo(null);
 
-        fenetre.add(new VuePuits(puits, 20));
+        fenetre.add(vuePuits);
 
         fenetre.setVisible(true);
     }
