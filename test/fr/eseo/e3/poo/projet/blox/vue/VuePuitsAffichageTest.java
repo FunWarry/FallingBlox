@@ -3,7 +3,8 @@ package fr.eseo.e3.poo.projet.blox.vue;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.UsineDePiece;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class VuePuitsAffichageTest {
 
@@ -13,37 +14,50 @@ public class VuePuitsAffichageTest {
     }
 
     private void testConstructeurPuits () {
-        VuePuits vuePuits = new VuePuits(new Puits());
+        Puits puits = new Puits();
+        VuePuits vuePuits = new VuePuits(puits);
 
         vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());
         vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());
+
+        vuePuits.getPuits().getPieceActuelle().setPosition(5, 5);
 
         JFrame fenetre = new JFrame("Puits");
 
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setSize(300, 400);
+        fenetre.setSize(puits.getLargeur()*(2+vuePuits.getTaille()), puits.getProfondeur()*(2+vuePuits.getTaille()));
         fenetre.setLocationRelativeTo(null);
 
         fenetre.add(vuePuits);
-
+        fenetre.pack();
         fenetre.setVisible(true);
+
+        vuePuits.getPuits().getPieceActuelle().setPosition(6, 5);
+        vuePuits.repaint();
     }
 
     private void testConstructeurPuitsTaille() {
-        VuePuits vuePuits = new VuePuits(new Puits(), 20);
+        Puits puits = new Puits();
+        VuePuits vuePuits = new VuePuits(puits, 20);
 
         vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());
         vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());
+
+        vuePuits.getPuits().getPieceActuelle().setPosition(5, 5);
 
         JFrame fenetre = new JFrame("Puits et taille");
 
         fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        fenetre.setSize(300, 400);
+        fenetre.setSize(puits.getLargeur()*(2+vuePuits.getTaille()), puits.getProfondeur()*(2+vuePuits.getTaille()));
         fenetre.setLocationRelativeTo(null);
 
         fenetre.add(vuePuits);
 
         fenetre.setVisible(true);
+
+        vuePuits.getPuits().getPieceActuelle().setPosition(6, 5);
+        vuePuits.repaint();
+
     }
 
     public static void main (String [] args) {

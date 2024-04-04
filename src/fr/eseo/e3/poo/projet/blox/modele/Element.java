@@ -57,4 +57,14 @@ public class Element {
     public int hashCode() {
         return Objects.hash(coordonnees, couleur);
     }
+
+    /**
+     * Methode permettant de deplacer un element
+     * @param deltaX deplacement en abscisse
+     * @param deltaY deplacement en ordonnee
+     */
+    public void deplacerDe(int deltaX, int deltaY) {
+        coordonnees.setAbscisse(coordonnees.getAbscisse() + deltaX);
+        coordonnees.setOrdonnee(coordonnees.getOrdonnee() + deltaY);
+    }
 }

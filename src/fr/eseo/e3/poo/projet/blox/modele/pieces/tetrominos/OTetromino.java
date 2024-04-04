@@ -21,4 +21,9 @@ public class OTetromino extends Tetromino{
             this.getElements()[i].setCouleur(couleur);
         }
     }
+
+    @Override
+    public void tourner(boolean sensHoraire) {
+        // Ne fait rien
+    }
 }

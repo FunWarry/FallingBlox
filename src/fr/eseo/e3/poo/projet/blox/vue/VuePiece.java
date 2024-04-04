@@ -39,7 +39,10 @@ public class VuePiece {
      * @return la couleur teintée
      */
     public static Color teinte(Color couleur) {
-        return new Color((int)(couleur.getRed() + (255-couleur.getRed())*MULTIPLIER_TEINTE), (int)(couleur.getGreen() + (255-couleur.getGreen())*MULTIPLIER_TEINTE), (int)(couleur.getBlue() + (255-couleur.getBlue())*MULTIPLIER_TEINTE));
+        double r = (couleur.getRed() + (255-couleur.getRed())*MULTIPLIER_TEINTE);
+        double g = (couleur.getGreen() + (255-couleur.getGreen())*MULTIPLIER_TEINTE);
+        double b = (couleur.getBlue() + (255-couleur.getBlue())*MULTIPLIER_TEINTE);
+        return new Color((int)r, (int)g, (int)b);
     }
 
     public void afficherPiece(Graphics2D g2D){
@@ -49,7 +52,8 @@ public class VuePiece {
             }  else {
                 g2D.setColor(teinte(piece.getElements()[i].getCouleur().getCouleurPourAffichage()));
             }
-            g2D.fill3DRect(piece.getElements()[i].getCoordonnees().getAbscisse()*this.taille, piece.getElements()[i].getCoordonnees().getOrdonnee()*this.taille, taille, taille, true);
+            g2D.fill3DRect(piece.getElements()[i].getCoordonnees().getAbscisse()*this.taille,
+                    piece.getElements()[i].getCoordonnees().getOrdonnee()*this.taille, taille, taille, true);
         }
     }
 

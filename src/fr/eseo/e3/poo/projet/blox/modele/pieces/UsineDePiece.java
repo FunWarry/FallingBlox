@@ -97,6 +97,8 @@ public class UsineDePiece {
 
 //            case 7:
 //                piece = new pentominos(new Coordonnees(2, 3), Couleur.ROSE);
+            default:
+                break;
         }
         progression = (progression + 1) % 2;
         return piece;

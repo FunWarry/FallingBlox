@@ -27,4 +27,17 @@ public interface Piece {
      * @param puits liste d'éléments
      */
     public void setPuits(Puits puits);
+
+    /**
+     * Methode permettant de deplacer un element
+     * @param deltaX deplacement en abscisse
+     * @param deltaY deplacement en ordonnee
+     */
+    public void deplacerDe(int deltaX, int deltaY);
+
+    /**
+     * Methode permettant de tourner la piece
+     * @param sensHoraire sens de rotation
+     */
+    public void tourner(boolean sensHoraire);
 }

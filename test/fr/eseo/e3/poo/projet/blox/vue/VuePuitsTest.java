@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.awt.*;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class VuePuitsTest {
 
@@ -17,7 +15,7 @@ public class VuePuitsTest {
     void getPuits() {
         VuePuits vuePuits = new VuePuits(new Puits());
         assertAll("getPuits",
-                () -> assertTrue(vuePuits.getPuits() instanceof Puits),
+                () -> assertInstanceOf(Puits.class, vuePuits.getPuits()),
                 () -> assertEquals(vuePuits.getPuits().toString(), new Puits().toString())
         );
     }

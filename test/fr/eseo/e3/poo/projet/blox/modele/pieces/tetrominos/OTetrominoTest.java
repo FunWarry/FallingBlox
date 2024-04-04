@@ -37,4 +37,17 @@ public class OTetrominoTest {
             () -> assertEquals(new Element(new Coordonnees(1, 0), Couleur.ROUGE), oTetromino.getElements()[3])
         );
     }
+
+    @Test
+    @DisplayName("Test de deplacement")
+    void deplacement() {
+        OTetromino oTetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
+        oTetromino.deplacerDe(1, 1);
+        assertAll(
+            () -> assertEquals(new Element(new Coordonnees(1, 1), Couleur.ROUGE), oTetromino.getElements()[0]),
+            () -> assertEquals(new Element(new Coordonnees(2, 1), Couleur.ROUGE), oTetromino.getElements()[1]),
+            () -> assertEquals(new Element(new Coordonnees(2, 0), Couleur.ROUGE), oTetromino.getElements()[2]),
+            () -> assertEquals(new Element(new Coordonnees(1, 0), Couleur.ROUGE), oTetromino.getElements()[3])
+        );
+    }
 }

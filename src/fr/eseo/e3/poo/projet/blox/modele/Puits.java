@@ -1,14 +1,13 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
-import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.Tetromino;
-
-import java.util.concurrent.Executor;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class Puits {
     private Tas tas;
 
-    private java.beans.PropertyChangeSupport pcs;
+    private PropertyChangeSupport pcs;
 
     /**
      * piceActuelle
@@ -57,7 +56,7 @@ public class Puits {
     public Puits(int largeur, int profondeur) {
         setLargeur(largeur);
         setProfondeur(profondeur);
-        pcs = new java.beans.PropertyChangeSupport(this);
+        pcs = new PropertyChangeSupport(this);
     }
 
     /**
@@ -160,7 +159,7 @@ public class Puits {
      * Methode permettant d'ajouter un listener
      * @param listener
      */
-    public void addPropertyChangeListener(java.beans.PropertyChangeListener listener) {
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
     }
 
@@ -168,7 +167,7 @@ public class Puits {
      * Methode permettant de supprimer un listener
      * @param listener
      */
-    public void removePropertyChangeListener(java.beans.PropertyChangeListener listener) {
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
 

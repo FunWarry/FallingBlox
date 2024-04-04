@@ -47,8 +47,8 @@ public abstract class Tetromino implements Piece {
 
     /**
      * Méthode permettant de déplacer la pièce.
-     * @param abscisse
-     * @param ordonnee
+     * @param abscisse deplacement en abscisse
+     * @param ordonnee deplacement en ordonnee
      */
     public void setPosition(int abscisse, int ordonnee){
         setElements(new Coordonnees(abscisse, ordonnee), this.elements[0].getCouleur());
@@ -64,7 +64,7 @@ public abstract class Tetromino implements Piece {
 
     /**
      * Méthode de mis en place du puits
-     * @param puits
+     * @param puits le puits du jeu
      */
     public void setPuits(Puits puits){
         this.puits = puits;
@@ -72,7 +72,7 @@ public abstract class Tetromino implements Piece {
 
     /**
      * Méthode d'affichage textuel d'un tétrominos
-     * @return
+     * @return une chaine de caractères
      */
     @Override
     public String toString(){
@@ -81,6 +81,28 @@ public abstract class Tetromino implements Piece {
             str.append("\t").append(elements[i].toString()).append("\n");
         }
         return this.getClass().getSimpleName() + " :\n" + str;
+    }
+
+    /**
+     * Methode permettant de deplacer un tetromino
+     * @param deltaX deplacement en abscisse
+     * @param deltaY deplacement en ordonnee
+     */
+    public void deplacerDe(int deltaX, int deltaY){
+        if(deltaY < 0 || deltaX > 1 || deltaX < -1 || deltaY > 1){
+            throw new IllegalArgumentException("Déplacement vers le haut impossible");
+        }
+        for (Element element : elements) {
+            element.deplacerDe(deltaX, deltaY);
+        }
+    }
+
+    /**
+     * Methode permettant de tourner un tetromino
+     * @param sensHoraire sens de rotation
+     */
+    public void tourner(boolean sensHoraire){
+        
     }
 
 }

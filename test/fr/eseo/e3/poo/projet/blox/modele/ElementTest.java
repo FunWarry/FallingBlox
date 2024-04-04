@@ -57,4 +57,13 @@ public class ElementTest {
         Element element2 = new Element(coordonnees, Couleur.BLEU);
         assertEquals(element.hashCode(), element2.hashCode());
     }
+
+    @Test
+    @DisplayName("Test de deplacerDe()")
+    void testDeplacerDe() {
+        Coordonnees coordonnees = new Coordonnees(1, 2);
+        Element element = new Element(coordonnees, Couleur.BLEU);
+        element.deplacerDe(1, 1);
+        assertEquals(new Coordonnees(2, 3), element.getCoordonnees());
+    }
 }

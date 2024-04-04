@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -44,12 +45,11 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      * @param taille taille du puit
      */
     public VuePuits(Puits puits, int taille) {
-        this.puits = puits;
-        this.taille = taille;
-        super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(), taille*this.puits.getProfondeur()));
+        this.setPuits(puits);
+        this.setTaille(taille);
 
-        // On ajoute un écouteur sur le puits
-        this.puits.addPropertyChangeListener(this);
+        //fond blanc
+        this.setBackground(Color.WHITE);
     }
 
     /**
@@ -65,14 +65,12 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      * @param puits le puit
      */
     public void setPuits(Puits puits) {
-        this.puits.removePropertyChangeListener(this);
-
+        if(this.puits != null){
+            this.puits.removePropertyChangeListener(this);
+        }
         this.puits = puits;
-
+        this.setTaille(this.taille);
         this.puits.addPropertyChangeListener(this);
-
-        super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(), taille*this.puits.getProfondeur()));
-
     }
 
     /**
@@ -88,8 +86,13 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      * @param taille la taille du puit
      */
     public void setTaille(int taille) {
+        if(this.puits == null){
+            super.setPreferredSize(new Dimension(taille, taille));
+        } else {
+            super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(),
+                    taille*this.puits.getProfondeur()));
+        }
         this.taille = taille;
-        super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(), taille*this.puits.getProfondeur()));
     }
 
     /**
@@ -121,8 +124,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
          */
         Graphics2D g2D = (Graphics2D)g.create();
 
-        super.setBackground(Color.WHITE);
-
+        //grille
         g2D.setColor(Color.LIGHT_GRAY);
         for(int i=0; i < puits.getLargeur() + 1; i++) {
             g2D.drawLine(taille*i, 0, taille*i, this.taille*this.puits.getProfondeur());
@@ -131,10 +133,11 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             g2D.drawLine(0, taille*i, this.taille*this.puits.getLargeur(), taille*i);
         }
 
+        //affichage de la piece
         if(this.vuePiece != null) {
             this.vuePiece.afficherPiece(g2D);
         }
-        /* Nous utiliserons l'instance de Graphics2D*/
+
         /*Puis nous liberons la memoire*/
         g2D.dispose();
     }
@@ -142,7 +145,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if(event.getPropertyName().equals(Puits.MODIFICATION_PIECE_ACTUELLE)) {
-            this.setVuePiece(new VuePiece(this.puits.getPieceActuelle(), this.taille));
+            this.setVuePiece(new VuePiece((Piece) event.getNewValue(), this.taille));
         }
     }
 

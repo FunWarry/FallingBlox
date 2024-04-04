@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class TetrominoTest {
 
@@ -24,6 +26,7 @@ class TetrominoTest {
     }
 
     @Test
+    @DisplayName("Test de setElements")
     void setElements() {
         Tetromino tetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
         tetromino.setElements(new Coordonnees(1, 1), Couleur.ROUGE);
@@ -36,6 +39,7 @@ class TetrominoTest {
     }
 
     @Test
+    @DisplayName("Test de setPosition")
     void setPosition() {
         Tetromino tetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
         tetromino.setPosition(1, 1);
@@ -48,8 +52,28 @@ class TetrominoTest {
     }
 
     @Test
+    @DisplayName("Test de toString")
     void testToString() {
         Tetromino tetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
         assertEquals("OTetromino :\n\t(0, 0) - ROUGE\n\t(1, 0) - ROUGE\n\t(1, -1) - ROUGE\n\t(0, -1) - ROUGE\n", tetromino.toString());
     }
+
+    @Test
+    @DisplayName("Test de deplacement ok")
+    void testDeplacementHorizontal() {
+        Tetromino tetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
+        assertDoesNotThrow(() -> tetromino.deplacerDe(1, 0));
+        assertDoesNotThrow(() -> tetromino.deplacerDe(-1, 0));
+    }
+
+    @Test
+    @DisplayName("Test de deplacement throw IllegalArgumentException")
+    void testDeplacementVertical() {
+        Tetromino tetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(0, -1));
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(0, 2));
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(2, 0));
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(-2, 0));
+    }
+
 }
