@@ -2,6 +2,7 @@ package fr.eseo.e3.poo.projet.blox.vue;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -32,6 +33,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      */
     private VuePiece vuePiece;
 
+    // PieceDeplacement
+    PieceDeplacement pieceDeplacement;
+
     /**
      * Constructeur de la classe VuePuits
      */
@@ -50,6 +54,11 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
         //fond blanc
         this.setBackground(Color.WHITE);
+
+        //ajout du controleur
+        this.pieceDeplacement = new PieceDeplacement(this);
+        this.addMouseMotionListener(this.pieceDeplacement);
+
     }
 
     /**
@@ -65,12 +74,20 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      * @param puits le puit
      */
     public void setPuits(Puits puits) {
-        if(this.puits != null){
+        if(this.puits != null) {
             this.puits.removePropertyChangeListener(this);
         }
         this.puits = puits;
-        this.setTaille(this.taille);
+        setTaille(this.getTaille());
         this.puits.addPropertyChangeListener(this);
+        //suppretion des anciens controleurs
+        this.removeMouseMotionListener(this.pieceDeplacement);
+
+        pieceDeplacement = new PieceDeplacement(this);
+
+        //ajout du controleur
+        this.addMouseMotionListener(this.pieceDeplacement);
+
     }
 
     /**
@@ -86,13 +103,13 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      * @param taille la taille du puit
      */
     public void setTaille(int taille) {
-        if(this.puits == null){
-            super.setPreferredSize(new Dimension(taille, taille));
-        } else {
+        this.taille = taille;
+        if(this.puits != null){
             super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(),
                     taille*this.puits.getProfondeur()));
+        } else {
+            super.setPreferredSize(new Dimension(taille, taille));
         }
-        this.taille = taille;
     }
 
     /**

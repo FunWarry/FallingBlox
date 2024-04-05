@@ -38,8 +38,8 @@ public class Puits {
     /**
      * Constante de classe pour identifier qu'une piece a ete modifiée
      */
-    public static final String MODIFICATION_PIECE_ACTUELLE = "";
-    public static final String MODIFICATION_PIECE_SUIVANTE = "";
+    public static final String MODIFICATION_PIECE_ACTUELLE = "modif piece actuelle";
+    public static final String MODIFICATION_PIECE_SUIVANTE = "modif piece suivante";
 
     /**
      * Constructeur de la classe Puits

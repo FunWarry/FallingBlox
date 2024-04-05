@@ -98,11 +98,37 @@ public abstract class Tetromino implements Piece {
     }
 
     /**
+     * Methode permettant de deplacer un tetromino a une position precise
+     * @param deltaX deplacement en abscisse
+     * @param deltaY deplacement en ordonnee
+     */
+    private void deplacerA(int deltaX, int deltaY){
+        for (Element element : elements) {
+            element.setCoordonnees(new Coordonnees(element.getCoordonnees().getAbscisse() + deltaX,
+                    element.getCoordonnees().getOrdonnee() + deltaY));
+        }
+    }
+
+    /**
      * Methode permettant de tourner un tetromino
      * @param sensHoraire sens de rotation
      */
     public void tourner(boolean sensHoraire){
-        
+        Coordonnees encienneCoordonnees = elements[0].getCoordonnees();
+        this.deplacerA(-encienneCoordonnees.getAbscisse(), -encienneCoordonnees.getOrdonnee());
+        for (int i = 1; i < this.elements.length; i++) {
+            if (sensHoraire) {
+                this.elements[i].setCoordonnees(new Coordonnees(-this.elements[i].getCoordonnees().getOrdonnee(),
+                        this.elements[i].getCoordonnees().getAbscisse()));
+            } else {
+                this.elements[i].setCoordonnees(new Coordonnees(this.elements[i].getCoordonnees().getOrdonnee(),
+                        -this.elements[i].getCoordonnees().getAbscisse()));
+            }
+        }
+        for(int i = 0; i < 4; i++){
+            System.out.println(this.elements[i].getCoordonnees());
+        }
+        this.deplacerA(encienneCoordonnees.getAbscisse(), encienneCoordonnees.getOrdonnee());
     }
 
 }

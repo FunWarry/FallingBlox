@@ -41,4 +41,23 @@ public class ITetrominoTest {
         }
     }
 
+    @Test
+    @DisplayName("Test de tourner horaire")
+    void rotation() {
+        Tetromino iTetromino = new ITetromino(new Coordonnees(1, 1), Couleur.ROUGE);
+        for(int i = 0; i < 4; i++)
+            System.out.println(iTetromino.getElements()[i]);
+
+        iTetromino.tourner(true);
+        for(int i = 0; i < 4; i++)
+            System.out.println(iTetromino.getElements()[i]);
+
+        assertAll(
+            () -> assertEquals(new Element(new Coordonnees(1, 1), Couleur.ROUGE), iTetromino.getElements()[0]),
+            () -> assertEquals(new Element(new Coordonnees(0, 1), Couleur.ROUGE), iTetromino.getElements()[1]),
+            () -> assertEquals(new Element(new Coordonnees(3, 1), Couleur.ROUGE), iTetromino.getElements()[2]),
+            () -> assertEquals(new Element(new Coordonnees(2, 1), Couleur.ROUGE), iTetromino.getElements()[3])
+        );
+    }
+
 }
