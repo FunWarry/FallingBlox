@@ -34,6 +34,7 @@ public class PieceDeplacementTest {
         fenetre.pack();
         fenetre.setVisible(true);
 
+        VuePuits vuePuits2 = new VuePuits(puits, 20);
     }
 
     private void testDeplacementPieceSourisTaille() {

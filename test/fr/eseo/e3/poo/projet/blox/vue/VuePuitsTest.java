@@ -4,6 +4,8 @@ import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.security.cert.X509Extension;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
@@ -27,6 +29,10 @@ public class VuePuitsTest {
         Puits puits = new Puits();
         vuePuits.setPuits(puits);
         assertEquals(vuePuits.getPuits().toString(), puits.toString());
+        Puits puits2 = new Puits(12,17);
+        vuePuits.setPuits(puits2);
+        System.out.println(vuePuits.getPuits().toString());
+        assertEquals(vuePuits.getPuits().toString(), puits2.toString());
     }
 
     @Test

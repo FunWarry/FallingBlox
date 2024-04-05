@@ -49,6 +49,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      * @param taille taille du puit
      */
     public VuePuits(Puits puits, int taille) {
+
         this.setPuits(puits);
         this.setTaille(taille);
 
@@ -56,8 +57,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         this.setBackground(Color.WHITE);
 
         //ajout du controleur
-        this.pieceDeplacement = new PieceDeplacement(this);
-        this.addMouseMotionListener(this.pieceDeplacement);
+
 
     }
 
@@ -78,12 +78,14 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             this.puits.removePropertyChangeListener(this);
         }
         this.puits = puits;
-        setTaille(this.getTaille());
+        setTaille(this.taille);
         this.puits.addPropertyChangeListener(this);
         //suppretion des anciens controleurs
-        this.removeMouseMotionListener(this.pieceDeplacement);
-
-        pieceDeplacement = new PieceDeplacement(this);
+        if(this.pieceDeplacement != null) {
+            this.removeMouseMotionListener(this.pieceDeplacement);
+        } else {
+            this.pieceDeplacement = new PieceDeplacement(this);
+        }
 
         //ajout du controleur
         this.addMouseMotionListener(this.pieceDeplacement);
@@ -105,10 +107,10 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     public void setTaille(int taille) {
         this.taille = taille;
         if(this.puits != null){
-            super.setPreferredSize(new Dimension(taille*this.puits.getLargeur(),
+            this.setPreferredSize(new Dimension(taille*this.puits.getLargeur(),
                     taille*this.puits.getProfondeur()));
         } else {
-            super.setPreferredSize(new Dimension(taille, taille));
+            this.setPreferredSize(new Dimension(taille, taille));
         }
     }
 
