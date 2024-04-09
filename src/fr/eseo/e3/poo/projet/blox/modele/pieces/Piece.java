@@ -2,6 +2,7 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
 import fr.eseo.e3.poo.projet.blox.modele.Element;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 
 public interface Piece {
     /**
@@ -33,11 +34,11 @@ public interface Piece {
      * @param deltaX deplacement en abscisse
      * @param deltaY deplacement en ordonnee
      */
-    public void deplacerDe(int deltaX, int deltaY);
+    public void deplacerDe(int deltaX, int deltaY) throws BloxException;
 
     /**
      * Methode permettant de tourner la piece
      * @param sensHoraire sens de rotation
      */
-    public void tourner(boolean sensHoraire);
+    public void tourner(boolean sensHoraire) throws BloxException;
 }

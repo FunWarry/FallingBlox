@@ -1,6 +1,7 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos;
 
 
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -40,7 +41,7 @@ public class OTetrominoTest {
 
     @Test
     @DisplayName("Test de deplacement")
-    void deplacement() {
+    void deplacement() throws BloxException {
         OTetromino oTetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
         oTetromino.deplacerDe(1, 1);
         assertAll(

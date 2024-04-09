@@ -37,7 +37,7 @@ public class VuePuitsAffichageTest {
     }
 
     private void testConstructeurPuitsTaille() {
-        Puits puits = new Puits();
+        Puits puits = new Puits(10, 15);
         VuePuits vuePuits = new VuePuits(puits, 20);
 
         vuePuits.getPuits().setPieceSuivante(UsineDePiece.genererTetromino());

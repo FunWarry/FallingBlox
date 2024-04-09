@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceDeplacement;
@@ -36,6 +37,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     // PieceDeplacement
     PieceDeplacement pieceDeplacement;
 
+    // PieceRotation
+    PieceRotation pieceRotation;
+
     /**
      * Constructeur de la classe VuePuits
      */
@@ -55,9 +59,6 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
         //fond blanc
         this.setBackground(Color.WHITE);
-
-        //ajout du controleur
-
 
     }
 
@@ -83,13 +84,18 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         //suppretion des anciens controleurs
         if(this.pieceDeplacement != null) {
             this.removeMouseMotionListener(this.pieceDeplacement);
-        } else {
-            this.pieceDeplacement = new PieceDeplacement(this);
+            this.removeMouseWheelListener(this.pieceDeplacement);
+            this.removeMouseListener(this.pieceDeplacement);
+            this.removeMouseListener(this.pieceRotation);
         }
+        this.pieceDeplacement = new PieceDeplacement(this);
+        this.pieceRotation = new PieceRotation(this);
 
         //ajout du controleur
         this.addMouseMotionListener(this.pieceDeplacement);
-
+        this.addMouseWheelListener(this.pieceDeplacement);
+        this.addMouseListener(this.pieceDeplacement);
+        this.addMouseListener(this.pieceRotation);
     }
 
     /**

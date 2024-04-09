@@ -22,12 +22,12 @@ public class Puits {
     /**
      * Valeut par défaut de la largeur du puits
      */
-    public static final int LARGEUR_PAR_DEFAUT = 10;
+    public static final int LARGEUR_PAR_DEFAUT = 12;
 
     /**
      * Valeut par défaut de la hauteur du puits
      */
-    public static final int PROFONDEUR_PAR_DEFAUT = 20;
+    public static final int PROFONDEUR_PAR_DEFAUT = 17;
 
     /**
      * Dimension plateau
@@ -54,9 +54,21 @@ public class Puits {
      * @param profondeur hauteur du puits
      */
     public Puits(int largeur, int profondeur) {
+        this(largeur, profondeur, 0, 0);
+    }
+
+    /**
+     * Constructeur de la classe Puits
+     * @param largeur largeur du puits
+     * @param profondeur hauteur du puits
+     * @param nbElements le nombre d’éléments ajouté dans le tas
+     * @param nbLignes le nombre de lignes utilisé pour le tas initial
+     */
+    public Puits(int largeur, int profondeur, int nbElements, int nbLignes) {
         setLargeur(largeur);
         setProfondeur(profondeur);
         pcs = new PropertyChangeSupport(this);
+        tas = new Tas(this, nbElements, nbLignes);
     }
 
     /**
@@ -137,6 +149,22 @@ public class Puits {
     }
 
     /**
+     * Methode de récupération du tas
+     * @return le tas
+     */
+    public Tas getTas() {
+        return tas;
+    }
+
+    /**
+     * Methode de modification du tas
+     * @param tas le tas
+     */
+    public void setTas(Tas tas) {
+        this.tas = tas;
+    }
+
+    /**
      * Methode permetant de retourné le puits en chaine de carractère
      * @return le puits en chaine de carractère
      */
@@ -170,5 +198,6 @@ public class Puits {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
     }
+
 
 }

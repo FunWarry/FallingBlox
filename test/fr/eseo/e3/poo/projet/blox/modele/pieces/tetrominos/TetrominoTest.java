@@ -1,8 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos;
 
-import fr.eseo.e3.poo.projet.blox.modele.Element;
-import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
-import fr.eseo.e3.poo.projet.blox.modele.Couleur;
+import fr.eseo.e3.poo.projet.blox.modele.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
-class TetrominoTest {
+public class TetrominoTest {
 
     @Test
     @DisplayName("Test de getElements")
@@ -74,6 +72,18 @@ class TetrominoTest {
         assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(0, 2));
         assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(2, 0));
         assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(-2, 0));
+    }
+
+    @Test
+    @DisplayName("Test de deplacement throw BloxException")
+    void testDeplacementBloxException() throws BloxException {
+        Puits puits = new Puits(10, 15);
+        Tetromino tetromino = new ITetromino(new Coordonnees(0, 3), Couleur.ROUGE);
+        tetromino.setPuits(puits);
+        puits.setPieceSuivante(tetromino);
+        puits.setPieceSuivante(tetromino);
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().tourner(true));
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().deplacerDe(-1, 0));
     }
 
 }
