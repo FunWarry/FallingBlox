@@ -46,7 +46,7 @@ public class PieceDeplacement extends MouseAdapter {
                     collumnActuelle = event.getX() / vuePuits.getTaille();
                 }
             } catch (BloxException e) {
-                throw new RuntimeException(e);
+                System.out.println(e.getMessage());
             }
         }
         vuePuits.repaint();
@@ -54,12 +54,12 @@ public class PieceDeplacement extends MouseAdapter {
 
     /**
      * Methode permettant de détecter si la sourie entre dans la fenêtre du jeu.
+     * LA piece actuelle est alors déplacée à gauche ou a droite du puits en fonction de la position de la souris dans la fenetre.
      * @param event événement souris
      */
     public void mouseEntered(MouseEvent event) {
         if (puits.getPieceActuelle() != null) {
-            puits.getPieceActuelle().setPosition(event.getX() / vuePuits.getTaille(),
-                    puits.getPieceActuelle().getElements()[0].getCoordonnees().getOrdonnee());
+            collumnActuelle = event.getX() / vuePuits.getTaille();
         }
     }
 

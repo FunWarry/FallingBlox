@@ -11,12 +11,12 @@ public abstract class Tetromino implements Piece {
     /**
      * Elements de la piece
      */
-    private Element[] elements = null;
+    private Element[] elements;
 
     /**
      * Puits du jeu
      */
-    private Puits puits = null;
+    private Puits puits;
 
     /**
      * Constructeur de la classe Tetromino
@@ -52,7 +52,7 @@ public abstract class Tetromino implements Piece {
      * @param ordonnee deplacement en ordonnee
      */
     public void setPosition(int abscisse, int ordonnee){
-        setElements(new Coordonnees(abscisse, ordonnee), this.elements[0].getCouleur());
+        setElements(new Coordonnees(abscisse, ordonnee), elements[0].getCouleur());
     }
 
     /**
@@ -93,25 +93,19 @@ public abstract class Tetromino implements Piece {
         if(deltaY < 0 || deltaX > 1 || deltaX < -1 || deltaY > 1){
             throw new IllegalArgumentException("Déplacement vers le haut impossible");
         }
-        BloxException e = check("deplacerDe", deltaX, deltaY, false);
-        if(e != null){
-            throw e;
+        if(puits != null){
+            for (Element element : elements) {
+                int x = element.getCoordonnees().getAbscisse() + deltaX;
+                int y = element.getCoordonnees().getOrdonnee() + deltaY;
+                if(this.puits.getTas().elementExists(x, y) || y >= this.puits.getProfondeur()){
+                    throw new BloxException("Déplacement impossible", BloxException.BLOX_COLLISION);
+                }
+                else if(x >= this.puits.getLargeur() || x < 0){
+                    throw new BloxException("Déplacement impossible", BloxException.BLOX_SORTIE_PUITS);
+                }
+            }
         }
         for (Element element : elements) {
-            element.deplacerDe(deltaX, deltaY);
-        }
-    }
-
-    /**
-     * Methode permettant de deplacer un tetromino
-     * @param deltaX deplacement en abscisse
-     * @param deltaY deplacement en ordonnee
-     */
-    private void deplacerDeSansVerif(int deltaX, int deltaY, Element[] elementsDepl){
-        if(deltaY < 0 || deltaX > 1 || deltaX < -1 || deltaY > 1){
-            throw new IllegalArgumentException("Déplacement vers le haut impossible");
-        }
-        for (Element element : elementsDepl) {
             element.deplacerDe(deltaX, deltaY);
         }
     }
@@ -121,7 +115,7 @@ public abstract class Tetromino implements Piece {
      * @param deltaX deplacement en abscisse
      * @param deltaY deplacement en ordonnee
      */
-    private void deplacerA(int deltaX, int deltaY){
+    public void deplacerA(int deltaX, int deltaY){
         for (Element element : elements) {
             element.setCoordonnees(new Coordonnees(element.getCoordonnees().getAbscisse() + deltaX,
                     element.getCoordonnees().getOrdonnee() + deltaY));
@@ -132,89 +126,49 @@ public abstract class Tetromino implements Piece {
      * Methode permettant de tourner un tetromino
      * @param sensHoraire sens de rotation
      */
-    public void tourner(boolean sensHoraire) throws BloxException{
-        BloxException e = check("tourner", 0, 0, sensHoraire);
-        if(e != null){
-            throw e;
-        }
-
-        Coordonnees encienneCoordonnees = elements[0].getCoordonnees();
-        this.deplacerA(-encienneCoordonnees.getAbscisse(), -encienneCoordonnees.getOrdonnee());
-        for (int i = 1; i < this.elements.length; i++) {
-            if (sensHoraire) {
-                this.elements[i].setCoordonnees(new Coordonnees(-this.elements[i].getCoordonnees().getOrdonnee(),
-                        this.elements[i].getCoordonnees().getAbscisse()));
-            } else {
-                this.elements[i].setCoordonnees(new Coordonnees(this.elements[i].getCoordonnees().getOrdonnee(),
-                        -this.elements[i].getCoordonnees().getAbscisse()));
-            }
-        }
-        this.deplacerA(encienneCoordonnees.getAbscisse(), encienneCoordonnees.getOrdonnee());
-    }
-
-    /**
-     * Methode permettant de tourner un tetromino
-     * @param sensHoraire sens de rotation
-     */
-    private void tournerSansVerif(boolean sensHoraire, Element[] elementsTour){
-        Coordonnees encienneCoordonnees = elementsTour[0].getCoordonnees();
-        this.deplacerA(-encienneCoordonnees.getAbscisse(), -encienneCoordonnees.getOrdonnee());
-        for (int i = 1; i < this.elements.length; i++) {
-            if (sensHoraire) {
-                this.elements[i].setCoordonnees(new Coordonnees(-this.elements[i].getCoordonnees().getOrdonnee(),
-                        this.elements[i].getCoordonnees().getAbscisse()));
-            } else {
-                this.elements[i].setCoordonnees(new Coordonnees(this.elements[i].getCoordonnees().getOrdonnee(),
-                        -this.elements[i].getCoordonnees().getAbscisse()));
-            }
-        }
-        this.deplacerA(encienneCoordonnees.getAbscisse(), encienneCoordonnees.getOrdonnee());
-    }
-
-    /**
-     * methode permetant de vérifier si le clone de la pièce peut se déplacer ou tourner
-     * @param method methode de déplacement
-     * @param deltaX deplacement en abscisse
-     * @param deltaY deplacement en ordonnee
-     * @param sensHoraire sens de rotation
-     * @return L'erreur si l'action est impossible
-     */
     @SuppressWarnings("checkstyle:CyclomaticComplexity")
-    public BloxException check(String method, int deltaX, int deltaY, boolean sensHoraire){
-        Element[] elementsTemporaire = this.getElements();
-        try {
-            if(puits != null) {
-                //faire l'opératoi demandé avec l'élements dupliqué
-                if(method.equals("deplacerDe")){
-                    this.deplacerDeSansVerif(deltaX, deltaY, elementsTemporaire);
-                }
-                else{
-                    this.tournerSansVerif(sensHoraire, elementsTemporaire);
-                }
+    public void tourner(boolean sensHoraire) throws BloxException{
+        int oldX = elements[0].getCoordonnees().getAbscisse();
+        int oldY = elements[0].getCoordonnees().getOrdonnee();
 
-                // vérifier les erreurs
-                for (Element eT : elementsTemporaire) {
-                    if (eT.getCoordonnees().getAbscisse() < 0 || eT.getCoordonnees().getAbscisse() >= puits.getLargeur() ||
-                            eT.getCoordonnees().getOrdonnee() >= puits.getProfondeur() || eT.getCoordonnees().getOrdonnee() < 0) {
-                        if(method.equals("deplacerDe"))
-                            throw new BloxException("Déplacement impossible", BloxException.BLOX_SORTIE_PUITS);
-                        else
-                            throw new BloxException("Rotation impossible", BloxException.BLOX_SORTIE_PUITS);
-                    }
-                    if (puits.getTas().elementExists(eT.getCoordonnees().getAbscisse(), eT.getCoordonnees().getOrdonnee())) {
-                        if(method.equals("deplacerDe"))
-                            throw new BloxException("Déplacement impossible", BloxException.BLOX_COLLISION);
-                        else
-                            throw new BloxException("Rotation impossible", BloxException.BLOX_COLLISION);
-                    }
+        if(puits != null){
+            for (Element element : elements) {
+                int x = element.getCoordonnees().getAbscisse() - oldX;
+                int y = element.getCoordonnees().getOrdonnee() - oldY;
+                System.out.println("x : " + x + " y : " + y);
+                int newX, newY = 0;
+                if (sensHoraire) {
+                    newX = oldX - y;
+                    newY=oldY + x;
+                } else {
+                    newX=oldX + y;
+                    newY=oldY - x;
                 }
-            } else {
-                return null;
+                System.out.println("xN : " + element.getCoordonnees().getAbscisse() + " yN : " + element.getCoordonnees().getOrdonnee());
+
+                if (this.puits.getTas().elementExists(newX, newY) || newY >= this.puits.getProfondeur()) {
+                    System.out.println("Collision");
+                    throw new BloxException("Rotation interdite", BloxException.BLOX_COLLISION);
+                } else if (newX >= this.puits.getLargeur() || newX < 0) {
+                    System.out.println("Sortie");
+                    throw new BloxException("Rotation interdite", BloxException.BLOX_SORTIE_PUITS);
+                }
             }
-        } catch (BloxException e) {
-            return e;
+
         }
-        return null;
+
+        this.deplacerA(-oldX, -oldY);
+        for (int i = 1; i < elements.length; i++) {
+            int x = elements[i].getCoordonnees().getAbscisse();
+            int y = elements[i].getCoordonnees().getOrdonnee();
+            if (sensHoraire) {
+                elements[i].setCoordonnees(new Coordonnees(-y,x));
+
+            } else {
+                elements[i].setCoordonnees(new Coordonnees(y,-x));
+            }
+        }
+        this.deplacerA(oldX, oldY);
     }
 
 }

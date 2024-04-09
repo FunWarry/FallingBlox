@@ -1,6 +1,10 @@
 package fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos;
 
-import fr.eseo.e3.poo.projet.blox.modele.*;
+import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
+import fr.eseo.e3.poo.projet.blox.modele.Couleur;
+import fr.eseo.e3.poo.projet.blox.modele.Element;
+import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -75,13 +79,14 @@ public class TetrominoTest {
     }
 
     @Test
-    @DisplayName("Test de deplacement throw BloxException")
+    @DisplayName("Test de deplacement et rotation throw BloxException")
     void testDeplacementBloxException() throws BloxException {
         Puits puits = new Puits(10, 15);
         Tetromino tetromino = new ITetromino(new Coordonnees(0, 3), Couleur.ROUGE);
         tetromino.setPuits(puits);
         puits.setPieceSuivante(tetromino);
         puits.setPieceSuivante(tetromino);
+        puits.getPieceActuelle().setPosition(0, 2);
         assertThrows(BloxException.class, () -> puits.getPieceActuelle().tourner(true));
         assertThrows(BloxException.class, () -> puits.getPieceActuelle().deplacerDe(-1, 0));
     }

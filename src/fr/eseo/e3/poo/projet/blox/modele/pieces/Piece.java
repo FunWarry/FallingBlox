@@ -41,4 +41,6 @@ public interface Piece {
      * @param sensHoraire sens de rotation
      */
     public void tourner(boolean sensHoraire) throws BloxException;
+
+    public void deplacerA(int x, int y);
 }

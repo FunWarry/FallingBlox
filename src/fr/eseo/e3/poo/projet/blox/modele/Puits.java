@@ -101,6 +101,7 @@ public class Puits {
         }
         pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, this.pieceSuivante, pieceSuivante);
         this.pieceSuivante = pieceSuivante;
+        this.pieceSuivante.setPuits(this);
     }
 
     /**
