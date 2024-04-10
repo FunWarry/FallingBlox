@@ -1,6 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.UsineDePiece;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -200,5 +202,25 @@ public class Puits {
         pcs.removePropertyChangeListener(listener);
     }
 
+    /**
+     * Methode permetant de gérer les collisions
+     */
+    private void gererCollision(){
+        this.getTas().ajouterElements(pieceActuelle);
+        this.setPieceSuivante(UsineDePiece.genererTetromino());
+    }
+
+    /**
+     * Methode de génération de gravité
+     */
+    public void gravite() {
+        try {
+            pieceActuelle.deplacerDe(0, 1);
+        } catch (BloxException e) {
+            if(e.getType() == BloxException.BLOX_COLLISION){
+                gererCollision();
+            }
+        }
+    }
 
 }

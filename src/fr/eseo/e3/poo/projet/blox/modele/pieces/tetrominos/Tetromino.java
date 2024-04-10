@@ -132,29 +132,7 @@ public abstract class Tetromino implements Piece {
         int oldY = elements[0].getCoordonnees().getOrdonnee();
 
         if(puits != null){
-            for (Element element : elements) {
-                int x = element.getCoordonnees().getAbscisse() - oldX;
-                int y = element.getCoordonnees().getOrdonnee() - oldY;
-                System.out.println("x : " + x + " y : " + y);
-                int newX, newY = 0;
-                if (sensHoraire) {
-                    newX = oldX - y;
-                    newY=oldY + x;
-                } else {
-                    newX=oldX + y;
-                    newY=oldY - x;
-                }
-                System.out.println("xN : " + element.getCoordonnees().getAbscisse() + " yN : " + element.getCoordonnees().getOrdonnee());
-
-                if (this.puits.getTas().elementExists(newX, newY) || newY >= this.puits.getProfondeur()) {
-                    System.out.println("Collision");
-                    throw new BloxException("Rotation interdite", BloxException.BLOX_COLLISION);
-                } else if (newX >= this.puits.getLargeur() || newX < 0) {
-                    System.out.println("Sortie");
-                    throw new BloxException("Rotation interdite", BloxException.BLOX_SORTIE_PUITS);
-                }
-            }
-
+            tournerException(sensHoraire);
         }
 
         this.deplacerA(-oldX, -oldY);
@@ -171,4 +149,28 @@ public abstract class Tetromino implements Piece {
         this.deplacerA(oldX, oldY);
     }
 
+    /**
+     * Methode permettant de verifier si un tetromino peut tourner
+     * @param sensHoraire sens de rotation
+     */
+    private void tournerException(boolean sensHoraire) throws BloxException {
+        int oldX = elements[0].getCoordonnees().getAbscisse();
+        int oldY = elements[0].getCoordonnees().getOrdonnee();
+
+        this.deplacerA(-oldX, -oldY);
+        for (int i = 1; i < elements.length; i++) {
+            int x = elements[i].getCoordonnees().getAbscisse();
+            int y = elements[i].getCoordonnees().getOrdonnee();
+            if (sensHoraire) {
+                if (this.puits.getTas().elementExists(-y, x) || -y >= this.puits.getProfondeur() || -y < 0 || x >= this.puits.getLargeur() || x < 0) {
+                    throw new BloxException("Rotation impossible", BloxException.BLOX_COLLISION);
+                }
+            } else {
+                if (this.puits.getTas().elementExists(y, -x) || y >= this.puits.getProfondeur() || y < 0 || -x >= this.puits.getLargeur() || -x < 0) {
+                    throw new BloxException("Rotation impossible", BloxException.BLOX_COLLISION);
+                }
+            }
+        }
+        this.deplacerA(oldX, oldY);
+    }
 }

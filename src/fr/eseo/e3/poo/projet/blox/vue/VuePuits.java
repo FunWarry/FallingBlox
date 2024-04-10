@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
@@ -40,6 +41,12 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     // PieceRotation
     PieceRotation pieceRotation;
 
+    // VueTas
+    private final VueTas vueTas;
+
+    //gravite
+    private Gravite gravite;
+
     /**
      * Constructeur de la classe VuePuits
      */
@@ -60,6 +67,8 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         //fond blanc
         this.setBackground(Color.WHITE);
 
+        //ajout de la vueTas
+        this.vueTas = new VueTas(this);
     }
 
     /**
@@ -149,6 +158,10 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
          */
         Graphics2D g2D = (Graphics2D)g.create();
 
+        //fond en blanc
+        g2D.setColor(Color.WHITE);
+        g2D.fillRect(0, 0, (int)getPreferredSize().getWidth(), (int)getPreferredSize().getHeight());
+
         //grille
         g2D.setColor(Color.LIGHT_GRAY);
         for(int i=0; i < puits.getLargeur() + 1; i++) {
@@ -163,6 +176,9 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             this.vuePiece.afficherPiece(g2D);
         }
 
+        //affichage du tas
+        this.vueTas.afficher(g2D);
+
         /*Puis nous liberons la memoire*/
         g2D.dispose();
     }
@@ -173,5 +189,14 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             this.setVuePiece(new VuePiece((Piece) event.getNewValue(), this.taille));
         }
     }
+
+    /**
+     * Methode permettant de recuperer la vueTas
+     * @return la vueTas
+     */
+    public VueTas getVueTas() {
+        return this.vueTas;
+    }
+
 
 }

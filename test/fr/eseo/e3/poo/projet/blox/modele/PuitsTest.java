@@ -83,7 +83,18 @@ public class PuitsTest {
         Puits puits = new Puits();
         Tetromino piece = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
         puits.setPieceSuivante(piece);
-        String expected = "Puits : Dimension 10 x 20\nPiece Actuelle : <aucune>" + "\nPiece Suivante : " + piece.toString();
+        String expected = "Puits : Dimension 12 x 17\nPiece Actuelle : <aucune>" + "\nPiece Suivante : " + piece.toString();
         assertEquals(expected, puits.toString());
     }
+
+    @Test
+    @DisplayName("Test de la méthode setTas et getTas")
+    void setTas() {
+        Puits puits = new Puits();
+        Tas tas = new Tas(puits);
+        puits.setTas(tas);
+        assertEquals(tas, puits.getTas());
+    }
+
+
 }

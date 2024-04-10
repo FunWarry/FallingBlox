@@ -1,8 +1,11 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 public class Tas {
     // puits
@@ -103,6 +106,14 @@ public class Tas {
             }
         }
         return false;
+    }
+
+    /**
+     * Methode permetant d'ajoouter un element
+     * @param piece contenant les éléments a ajouter
+     */
+    public void ajouterElements(Piece piece) {
+        elements.addAll(Arrays.asList(piece.getElements()));
     }
 
 }

@@ -1,12 +1,15 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.ITetromino;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TasTest {
 
@@ -62,6 +65,24 @@ public class TasTest {
         Puits puits = new Puits();
         Tas tas = new Tas(puits, 10, 10);
         assertFalse(tas.getElements().isEmpty());
+    }
+
+    @Test
+    @DisplayName("Test de la methode getPuits")
+    public void testGetPuits() {
+        Puits puits = new Puits();
+        Tas tas = new Tas(puits, 10, 10);
+        assertEquals(puits, tas.getPuits());
+    }
+
+    @Test
+    @DisplayName("Test de la methode elementExists et ajouterElements")
+    public void testElementExists() {
+        Puits puits = new Puits();
+        Tas tas = new Tas(puits, 10, 15);
+        assertFalse(tas.elementExists(0, 0));
+        tas.ajouterElements(new ITetromino(new Coordonnees(4, 13), Couleur.ROUGE));
+        assertTrue(tas.elementExists(4, 13));
     }
 
 }
