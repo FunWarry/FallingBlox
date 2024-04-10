@@ -11,20 +11,21 @@ import java.awt.BorderLayout;
 
 public class FallingBloxVersion1 {
     public static void main(String[] args) {
+        FallingBloxVersion1 app = new FallingBloxVersion1();
         if (args.length > 2) {
             System.err.println("To many arguments");
-            printUsage();
+            app.printUsage();
             System.exit(1);
         } else if (args.length == 2) {
-            jeux(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+            app.jeux(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
         } else if (args.length == 1) {
-            jeux(Integer.parseInt(args[0]), 1);
+            app.jeux(Integer.parseInt(args[0]), 1);
         } else {
-            jeux(0, 1);
+            app.jeux(0, 1);
         }
     }
 
-    public static void printUsage() {
+    public void printUsage() {
         System.out.println("HELP MENUE : ");
         System.out.println("Usage : FallingBloxVersion1 <option>");
         System.out.println("Options :");
@@ -38,7 +39,7 @@ public class FallingBloxVersion1 {
         System.out.println("puits vide\n\n");
     }
 
-    public static void jeux(int nbElementsDebut, int nbLignesDebut) {
+    public void jeux(int nbElementsDebut, int nbLignesDebut) {
         System.out.println("FallingBloxVersion1 lancement");
 
         Puits puits = new Puits(Puits.LARGEUR_PAR_DEFAUT, Puits.PROFONDEUR_PAR_DEFAUT, nbElementsDebut, nbLignesDebut);
