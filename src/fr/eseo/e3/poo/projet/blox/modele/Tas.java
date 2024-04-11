@@ -1,5 +1,8 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import java.beans.PropertyChangeSupport;
+import java.beans.PropertyChangeListener;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.ArrayList;
@@ -13,6 +16,14 @@ public class Tas {
 
     //elements
     private List<Element> elements;
+
+    private PropertyChangeSupport pcs;
+
+    //Constante du message d'ajout au score
+    public static final String AJOUT_SCORE = "ajout score";
+
+    //Score
+    private int score = 0;
 
     /**
      * Constructeur de la classe Tas
@@ -31,6 +42,7 @@ public class Tas {
             throw new IllegalArgumentException("Le nombre de lignes est trop élevé pour la profondeur du puits.");
         }
         construireTas(nbElements, nbLignes, rand);
+        pcs = new PropertyChangeSupport(this);
     }
 
     /**
@@ -77,6 +89,14 @@ public class Tas {
     }
 
     /**
+     * Methode de recuperation du score
+     * @return le score
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
      * Methode permetant de construire un tas
      * @param nbElements le nombre d'elements
      * @param nbLignes le nombre de lignes
@@ -114,13 +134,32 @@ public class Tas {
      */
     public void ajouterElements(Piece piece) {
         elements.addAll(Arrays.asList(piece.getElements()));
+        pcs.firePropertyChange(AJOUT_SCORE, this.score, this.score + piece.getElements().length*4);
 
+        int ligneSupprimee = 0;
         //regarder si une ligne existe
         for (Element element : piece.getElements()) {
             int y = element.getCoordonnees().getOrdonnee();
             if (elements.stream().filter(e -> e.getCoordonnees().getOrdonnee() == y).count() == puits.getLargeur()) {
                 supprimerLigne(y);
+                ligneSupprimee++;
             }
+        }
+        switch (ligneSupprimee) {
+            case 1:
+                pcs.firePropertyChange(AJOUT_SCORE, this.score, this.score + 10*puits.getLargeur());
+                break;
+            case 2:
+                pcs.firePropertyChange(AJOUT_SCORE, this.score, this.score + 25*puits.getLargeur());
+                break;
+            case 3:
+                pcs.firePropertyChange(AJOUT_SCORE, this.score, this.score + 50*puits.getLargeur());
+                break;
+            case 4:
+                pcs.firePropertyChange(AJOUT_SCORE, this.score, this.score + 100*10*puits.getLargeur());
+                break;
+            default:
+                break;
         }
     }
 
@@ -135,6 +174,22 @@ public class Tas {
                 elements.get(elements.indexOf(element)).deplacerDe(0, 1);
             }
         }
+    }
+
+    /**
+     * Methode permettant d'ajouter un listener
+     * @param listener
+     */
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        pcs.addPropertyChangeListener(listener);
+    }
+
+    /**
+     * Methode permettant de supprimer un listener
+     * @param listener
+     */
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        pcs.removePropertyChangeListener(listener);
     }
 
 }

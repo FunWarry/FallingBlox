@@ -1,0 +1,11 @@
+extension score
+
+ajouter un lanceur d'événement a chaque fois qu'une ligne est faites
+ajouter un lanceur d'événement a chaque fois qu'un element est posé
+
+(tous ca dans tas)
+
+faire en sorte d'ajouter un texte de score a PanneauInformation
+//CHECK
+
+//TODO

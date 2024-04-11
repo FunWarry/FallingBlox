@@ -30,7 +30,7 @@ public class PieceRotation extends MouseAdapter {
                     this.puits.getPieceActuelle().tourner(true);
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
             }
         }
         vuePuits.repaint();
