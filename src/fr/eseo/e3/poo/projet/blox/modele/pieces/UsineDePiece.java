@@ -5,6 +5,11 @@ import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.ITetromino;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.OTetromino;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.Tetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.TTetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.LTetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.JTetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.ZTetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.STetromino;
 
 import java.util.Random;
 public class UsineDePiece {
@@ -35,6 +40,11 @@ public class UsineDePiece {
     private static int progression = 0;
 
     /**
+     * Nombre de pièces
+     */
+    private static final int NOMBRE_DE_PIECES = 7;
+
+    /**
      * Methode pour créer une pièce
      * @hidden
      */
@@ -49,7 +59,7 @@ public class UsineDePiece {
      *             - CYCLIC
      */
     public static void setMode(int mode) {
-        modeGeneration = mode % 3;
+        modeGeneration = mode % (NOMBRE_DE_PIECES + 1);
         progression = 0;
     }
 
@@ -64,9 +74,9 @@ public class UsineDePiece {
     public static Tetromino genererTetromino() {
         switch (modeGeneration){
             case ALEATOIRE_COMPLET:
-                progression = new Random().nextInt(2);
+                progression = new Random().nextInt(NOMBRE_DE_PIECES);
             case ALEATOIRE_PIECE:
-                progression = new Random().nextInt(2);
+                progression = new Random().nextInt(NOMBRE_DE_PIECES);
             default:
                 break;
         }
@@ -79,28 +89,28 @@ public class UsineDePiece {
             case 1:
                 piece = new ITetromino(new Coordonnees(2, 3), Couleur.ORANGE);
                 break;
-//            case 2:
-//                piece = new TTetrominos(new Coordonnees(2, 3), Couleur.BLEU);
-//                break;
-//            case 3:
-//                piece = new LTetrominos(new Coordonnees(2, 3), Couleur.VERT);
-//                break;
-//            case 4:
-//                piece = new JTetrominos(new Coordonnees(2, 3), Couleur.JAUNE);
-//                break;
-//            case 5:
-//                piece = new ZTetrominos(new Coordonnees(2, 3), Couleur.CYAN);
-//                break;
-//            case 6:
-//                piece = new STetrominos(new Coordonnees(2, 3), Couleur.VIOLET);
-//                break;
+            case 2:
+                piece = new TTetromino(new Coordonnees(2, 3), Couleur.BLEU);
+                break;
+            case 3:
+                piece = new LTetromino(new Coordonnees(2, 3), Couleur.VERT);
+                break;
+            case 4:
+                piece = new JTetromino(new Coordonnees(2, 3), Couleur.JAUNE);
+                break;
+            case 5:
+                piece = new ZTetromino(new Coordonnees(2, 3), Couleur.CYAN);
+                break;
+            case 6:
+                piece = new STetromino(new Coordonnees(2, 3), Couleur.VIOLET);
+                break;
 
 //            case 7:
 //                piece = new pentominos(new Coordonnees(2, 3), Couleur.ROSE);
             default:
                 break;
         }
-        progression = (progression + 1) % 2;
+        progression = (progression + 1) % NOMBRE_DE_PIECES;
         return piece;
     }
 }

@@ -114,6 +114,27 @@ public class Tas {
      */
     public void ajouterElements(Piece piece) {
         elements.addAll(Arrays.asList(piece.getElements()));
+
+        //regarder si une ligne existe
+        for (Element element : elements) {
+            int y = element.getCoordonnees().getOrdonnee();
+            if (elements.stream().filter(e -> e.getCoordonnees().getOrdonnee() == y).count() == puits.getLargeur()){
+                supprimerLigne(y);
+            }
+        }
+    }
+
+    /**
+     * Methode permetant de supprimer une ligne
+     * @param y l'ordonnee de la ligne a supprimer
+     */
+    public void supprimerLigne(int y) {
+        elements.removeIf(element -> element.getCoordonnees().getOrdonnee() == y);
+        for (Element element : elements) {
+            if (element.getCoordonnees().getOrdonnee() < y) {
+                elements.get(elements.indexOf(element)).deplacerDe(0, 1);
+            }
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package fr.eseo.e3.poo.projet.blox.modele;
 
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.ITetromino;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.Tetromino;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -83,6 +84,16 @@ public class TasTest {
         assertFalse(tas.elementExists(0, 0));
         tas.ajouterElements(new ITetromino(new Coordonnees(4, 13), Couleur.ROUGE));
         assertTrue(tas.elementExists(4, 13));
+    }
+
+    @Test
+    @DisplayName("Test de la fonction de suppression de ligne")
+    public void testSupprimerLigne() {
+        Puits puits = new Puits();
+        Tas tas = new Tas(puits, 10, 15);
+        tas.ajouterElements(new ITetromino(new Coordonnees(4, 13), Couleur.ROUGE));
+        tas.supprimerLigne(13);
+        assertFalse(tas.elementExists(4, 13));
     }
 
 }
