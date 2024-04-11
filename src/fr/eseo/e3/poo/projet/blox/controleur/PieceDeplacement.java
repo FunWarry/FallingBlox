@@ -46,7 +46,7 @@ public class PieceDeplacement extends MouseAdapter {
                     collumnActuelle = event.getX() / vuePuits.getTaille();
                 }
             } catch (BloxException e) {
-                System.out.println(e.getMessage());
+                System.err.println(e.getMessage());
             }
         }
         vuePuits.repaint();
@@ -73,7 +73,7 @@ public class PieceDeplacement extends MouseAdapter {
                 try {
                     puits.getPieceActuelle().deplacerDe(0, 1);
                 } catch (BloxException e) {
-                    throw new RuntimeException(e);
+                    System.err.println(e.getMessage());
                 }
             }
         }

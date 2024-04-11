@@ -24,12 +24,12 @@ public class Puits {
     /**
      * Valeut par défaut de la largeur du puits
      */
-    public static final int LARGEUR_PAR_DEFAUT = 12;
+    public static final int LARGEUR_PAR_DEFAUT = 10;
 
     /**
      * Valeut par défaut de la hauteur du puits
      */
-    public static final int PROFONDEUR_PAR_DEFAUT = 17;
+    public static final int PROFONDEUR_PAR_DEFAUT = 20;
 
     /**
      * Dimension plateau
