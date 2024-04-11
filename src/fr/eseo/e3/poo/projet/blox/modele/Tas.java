@@ -116,9 +116,9 @@ public class Tas {
         elements.addAll(Arrays.asList(piece.getElements()));
 
         //regarder si une ligne existe
-        for (Element element : elements) {
+        for (Element element : piece.getElements()) {
             int y = element.getCoordonnees().getOrdonnee();
-            if (elements.stream().filter(e -> e.getCoordonnees().getOrdonnee() == y).count() == puits.getLargeur()){
+            if (elements.stream().filter(e -> e.getCoordonnees().getOrdonnee() == y).count() == puits.getLargeur()) {
                 supprimerLigne(y);
             }
         }

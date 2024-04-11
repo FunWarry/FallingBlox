@@ -92,8 +92,9 @@ public class TasTest {
         Puits puits = new Puits();
         Tas tas = new Tas(puits, 10, 15);
         tas.ajouterElements(new ITetromino(new Coordonnees(4, 13), Couleur.ROUGE));
+        assertTrue(tas.elementExists(4, 11));
         tas.supprimerLigne(13);
-        assertFalse(tas.elementExists(4, 13));
+        assertFalse(tas.elementExists(4, 11));
     }
 
 }

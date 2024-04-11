@@ -73,7 +73,7 @@ public class PieceDeplacement extends MouseAdapter {
                 try {
                     puits.getPieceActuelle().deplacerDe(0, 1);
                 } catch (BloxException e) {
-                    throw new RuntimeException(e);
+                    System.out.println(e.getMessage());
                 }
             }
         }
