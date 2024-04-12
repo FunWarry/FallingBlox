@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.EchangePiece;
 import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.controleur.PieceRotation;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
@@ -40,6 +41,12 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     // PieceRotation
     PieceRotation pieceRotation;
+
+    /**
+     * EchangePiece
+     * @since extension échange piece
+     */
+    EchangePiece echangePiece;
 
     // VueTas
     private final VueTas vueTas;
@@ -82,6 +89,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     /**
      * Methode permettant de definir le puit
      * @param puits le puit
+     * @Modif échange piece
      */
     public void setPuits(Puits puits) {
         if(this.puits != null) {
@@ -96,15 +104,18 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
             this.removeMouseWheelListener(this.pieceDeplacement);
             this.removeMouseListener(this.pieceDeplacement);
             this.removeMouseListener(this.pieceRotation);
+            this.removeMouseWheelListener(this.echangePiece); // ajout pour l'extension échange piece
         }
         this.pieceDeplacement = new PieceDeplacement(this);
         this.pieceRotation = new PieceRotation(this);
+        this.echangePiece = new EchangePiece(this); // ajout pour l'extension échange piece
 
         //ajout du controleur
         this.addMouseMotionListener(this.pieceDeplacement);
         this.addMouseWheelListener(this.pieceDeplacement);
         this.addMouseListener(this.pieceDeplacement);
         this.addMouseListener(this.pieceRotation);
+        this.addMouseWheelListener(this.echangePiece); // ajout pour l'extension échange piece
     }
 
     /**

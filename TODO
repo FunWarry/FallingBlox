@@ -8,4 +8,23 @@ ajouter un lanceur d'événement a chaque fois qu'un element est posé
 faire en sorte d'ajouter un texte de score a PanneauInformation
 //CHECK
 
+extention changement vitesse
+
+dans tas :
+ajouter un compteur de ligne effectué
+
+ajouter un lecteur d'événement a gravité
+
+ajouter un texte pour afficher la vitesse dans PanneauInformation
+
+//CHECK
+
 //TODO
+extension échange entre la pièce actuelle et la pièce suivante
+
+faire un nouveau controller avec un listener de la roulette de la souris
+
+gérer les exception pendant le changement de la piece
+
+echangé les pieces et repaint la vuepuits
+

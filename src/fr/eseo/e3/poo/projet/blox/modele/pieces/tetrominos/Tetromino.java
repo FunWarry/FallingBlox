@@ -123,6 +123,23 @@ public abstract class Tetromino implements Piece {
     }
 
     /**
+     * Methode permettant de deplacer la piece avec l'exception de collision
+     * @throws BloxException si la piece est en collision
+     * @since extension échange piece
+     */
+    public void echangeException() throws BloxException{
+        for (Element element : elements) {
+            int x = element.getCoordonnees().getAbscisse();
+            int y = element.getCoordonnees().getOrdonnee();
+            if (this.puits.getTas().elementExists(x, y) || y >= this.puits.getProfondeur()){
+                throw new BloxException("Déplacement impossible", BloxException.BLOX_COLLISION);
+            } else if (x >= this.puits.getLargeur() || x < 0){
+                throw new BloxException("Déplacement impossible", BloxException.BLOX_SORTIE_PUITS);
+            }
+        }
+    }
+
+    /**
      * Methode permettant de tourner un tetromino
      * @param sensHoraire sens de rotation
      */

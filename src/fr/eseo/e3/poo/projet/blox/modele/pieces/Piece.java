@@ -43,4 +43,11 @@ public interface Piece {
     public void tourner(boolean sensHoraire) throws BloxException;
 
     public void deplacerA(int x, int y);
+
+    /**
+     * Methode permettant de deplacer la piece avec l'exception de collision
+     * @throws BloxException si la piece est en collision
+     * @since extension échange piece
+     */
+    public void echangeException() throws BloxException;
 }

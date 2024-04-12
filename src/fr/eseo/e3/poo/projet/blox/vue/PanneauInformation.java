@@ -6,7 +6,10 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
 import javax.swing.JPanel;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Font;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -43,6 +46,18 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
     public static final String AJOUT_SCORE = "ajout score";
 
     /**
+     * Vitesse
+     * @since extension vitesse
+     */
+    private double vitesse = 1;
+
+    /**
+     * constante de classe pour identifier qu'un score a ete ajouté
+     * @since extension score
+     */
+    public static final String CHANGEMENT_VITESSE = "changement vitesse";
+
+    /**
      * Constructeur de la classe PanneauInformation
      * @param puits Puits du jeu
      */
@@ -52,6 +67,7 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
         this.tas = puits.getTas();
         this.puits.addPropertyChangeListener(this);
         this.tas.addPropertyChangeListener(this);
+        this.vitesse = this.tas.getVitesse();
         super.setPreferredSize(new Dimension(TAILLE, TAILLE));
     }
 
@@ -67,11 +83,16 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
             this.score += (int) evt.getNewValue();
             this.repaint();
         }
+        if (evt.getPropertyName().equals(CHANGEMENT_VITESSE)){
+            this.vitesse = (double) evt.getNewValue();
+            this.repaint();
+        }
     }
     /**
      * Méthode permettant de mettre à jour le panneau d'information
      * @param g Graphics
      * @Modif ajout du score
+     * @Modif ajout de la vitesse
      */
     @Override
     protected void paintComponent(Graphics g){
@@ -80,11 +101,19 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
         if (this.vuePiece != null)
             this.vuePiece.afficherPiece(g2D);
 
+        //ajout du score
         g2D.setColor(java.awt.Color.BLACK);
-        g2D.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 20));
+        g2D.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 16));
         g2D.drawString("Score : ", 10, 100);
         g2D.setFont(new java.awt.Font("Arial", Font.PLAIN, 10));
         g2D.drawString(Integer.toString(this.score), 10, 120);
+
+        //ajout de la vitesse
+        g2D.setColor(java.awt.Color.BLACK);
+        g2D.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 16));
+        g2D.drawString("Speed : ", 10, 150);
+        g2D.setFont(new java.awt.Font("Arial", Font.PLAIN, 10));
+        g2D.drawString("X" + this.vitesse, 10, 170);
 
         g2D.dispose();
     }

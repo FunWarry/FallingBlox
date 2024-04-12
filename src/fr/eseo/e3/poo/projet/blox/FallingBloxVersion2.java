@@ -6,8 +6,8 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.UsineDePiece;
 import fr.eseo.e3.poo.projet.blox.vue.PanneauInformation;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
 
 public class FallingBloxVersion2 {
     public static void main(String[] args) {

@@ -17,13 +17,40 @@ public class Tas {
     //elements
     private List<Element> elements;
 
+    /**
+     * Tas
+     * @since extension score
+     */
     private PropertyChangeSupport pcs;
 
-    //Constante du message d'ajout au score
+    /**
+     * Constante du message d'ajout au score
+     * @since extension score
+     */
     public static final String AJOUT_SCORE = "ajout score";
 
-    //Score
+    /**
+     * score
+     * @since extension score
+     */
     private int score = 0;
+
+    /**
+     * Compteur de ligne effectuée
+     * @since extension vitesse
+     */
+    private int ligneEffectuee = 0;
+
+    /**
+     * Constante de message de changement de vitesse
+     * @since extension vitesse
+     */
+    public static final String CHANGEMENT_VITESSE = "changement vitesse";
+
+    /**
+     * Vitesse
+     */
+    private double vitesse = 1;
 
     /**
      * Constructeur de la classe Tas
@@ -91,9 +118,19 @@ public class Tas {
     /**
      * Methode de recuperation du score
      * @return le score
+     * @since extension score
      */
     public int getScore() {
         return score;
+    }
+
+    /**
+     * Methode de recuperation de la vitesse
+     * @return la vitesse
+     * @since extension vitesse
+     */
+    public double getVitesse() {
+        return vitesse;
     }
 
     /**
@@ -145,6 +182,8 @@ public class Tas {
                 ligneSupprimee++;
             }
         }
+        ligneEffectuee += ligneSupprimee;
+        pcs.firePropertyChange(CHANGEMENT_VITESSE, this.vitesse, 1 + 0.2*(int)(ligneEffectuee/10) );
         switch (ligneSupprimee) {
             case 1:
                 pcs.firePropertyChange(AJOUT_SCORE, this.score, this.score + 10*puits.getLargeur());

@@ -107,6 +107,28 @@ public class Puits {
     }
 
     /**
+     * MEthode permetant de modifier la piece suivante en gradant la position de la piece actuelle
+     * @throws NullPointerException si la piece suivante est null
+     * @throws BloxException si la piece suivante est en collision
+     * @since extension échange piece
+     */
+    public void setEchangePiece() throws NullPointerException, BloxException {
+        Piece enciennePiece = this.pieceActuelle;
+        try {
+            this.pieceSuivante.setPosition(enciennePiece.getElements()[0].getCoordonnees().getAbscisse(), enciennePiece.getElements()[0].getCoordonnees().getOrdonnee());
+            pieceSuivante.echangeException();
+        } catch (BloxException e) {
+            throw new BloxException(e.getMessage(), BloxException.BLOX_SORTIE_PUITS);
+        }
+        pcs.firePropertyChange(MODIFICATION_PIECE_ACTUELLE, this.pieceActuelle, this.pieceSuivante);
+        this.pieceActuelle = this.pieceSuivante;
+        this.pieceActuelle.setPosition(enciennePiece.getElements()[0].getCoordonnees().getAbscisse(), enciennePiece.getElements()[0].getCoordonnees().getOrdonnee());
+        pcs.firePropertyChange(MODIFICATION_PIECE_SUIVANTE, this.pieceSuivante, pieceSuivante);
+        this.pieceSuivante = enciennePiece;
+        this.pieceSuivante.setPuits(this);
+    }
+
+    /**
      * Methode permettant de récuperer la largeur du puits
      * @return la largeur du puits
      */
@@ -117,7 +139,6 @@ public class Puits {
     /**
      * Methode permettant de modifier la largeur du puits
      * @param largeur la largeur du puits
-     *
      * @throws IllegalArgumentException si la largeur est incorrecte
      */
     public void setLargeur(int largeur) {
@@ -139,9 +160,7 @@ public class Puits {
     /**
      * Methode permettant de modifier la profondeur du puits
      * @param profondeur la profondeur du puits
-     *
      * @throws IllegalArgumentException si la profondeur est incorrecte
-     *
      */
     public void setProfondeur(int profondeur) {
         if (profondeur < 15 || profondeur > 25) {

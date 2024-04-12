@@ -113,4 +113,5 @@ public class UsineDePiece {
         progression = (progression + 1) % NOMBRE_DE_PIECES;
         return piece;
     }
+
 }

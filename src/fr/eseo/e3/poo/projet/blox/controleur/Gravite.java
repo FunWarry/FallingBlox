@@ -1,13 +1,15 @@
 package fr.eseo.e3.poo.projet.blox.controleur;
 
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
+import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import javax.swing.Timer;
 
-public class Gravite implements ActionListener {
+public class Gravite implements ActionListener, PropertyChangeListener {
     //timer
     private Timer timer;
 
@@ -21,12 +23,19 @@ public class Gravite implements ActionListener {
     private final Puits puits;
 
     /**
+     * tas
+     * @since extension vitesse
+     */
+    private Tas tas;
+
+    /**
      * Constructeur de la classe Gravite
      * @param vuePuits la vue du puits
      */
     public Gravite(VuePuits vuePuits) {
         this.vuePuits = vuePuits;
         this.puits = vuePuits.getPuits();
+        this.tas = puits.getTas();
         this.periodicite = 1000;
         this.timer = new Timer(periodicite, this);
         this.timer.start();
@@ -55,6 +64,17 @@ public class Gravite implements ActionListener {
     public void actionPerformed(ActionEvent event) {
         puits.gravite();
         vuePuits.repaint();
+    }
+
+    /**
+     * propertyChange
+     * @param event l'action
+     * @since extension vitesse
+     */
+    public void propertyChange(java.beans.PropertyChangeEvent event) {
+        if (event.getPropertyName().equals(Tas.CHANGEMENT_VITESSE)) {
+            setPeriodicite((int) (1000 / (double) event.getNewValue()));
+        }
     }
 
 }

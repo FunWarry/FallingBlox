@@ -45,15 +45,15 @@ public class VuePiece {
         return new Color((int)r, (int)g, (int)b);
     }
 
-    public void afficherPiece(Graphics2D g2D){
-        for(int i = 0; i < piece.getElements().length; i++){
-            if(i != 0){
+    public void afficherPiece(Graphics2D g2D) {
+        for (int i = 0; i < piece.getElements().length; i++) {
+            if (i != 0) {
                 g2D.setColor(piece.getElements()[i].getCouleur().getCouleurPourAffichage());
-            }  else {
+            } else {
                 g2D.setColor(teinte(piece.getElements()[i].getCouleur().getCouleurPourAffichage()));
             }
-            g2D.fill3DRect(piece.getElements()[i].getCoordonnees().getAbscisse()*this.taille,
-                    piece.getElements()[i].getCoordonnees().getOrdonnee()*this.taille, taille, taille, true);
+            g2D.fill3DRect(piece.getElements()[i].getCoordonnees().getAbscisse() * this.taille,
+                    piece.getElements()[i].getCoordonnees().getOrdonnee() * this.taille, taille, taille, true);
         }
     }
 
