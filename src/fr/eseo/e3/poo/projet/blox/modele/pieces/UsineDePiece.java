@@ -2,6 +2,7 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces;
 
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.pentominos.*;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.ITetromino;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.OTetromino;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.Tetromino;
@@ -12,6 +13,11 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.ZTetromino;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.STetromino;
 
 import java.util.Random;
+
+/**
+ * Usine de pièces
+ * @Modif extension pentominos
+ */
 public class UsineDePiece {
     /**
      * Constante pour la création aléatoire complet de pièces
@@ -104,13 +110,82 @@ public class UsineDePiece {
             case 6:
                 piece = new STetromino(new Coordonnees(2, 3), Couleur.VIOLET);
                 break;
-
-//            case 7:
-//                piece = new pentominos(new Coordonnees(2, 3), Couleur.ROSE);
             default:
                 break;
         }
         progression = (progression + 1) % NOMBRE_DE_PIECES;
+        return piece;
+    }
+
+    public static Pentomino genererPentomino() {
+        int switchPento = new Random().nextInt(18);
+
+        Pentomino piece = null;
+        switch (switchPento){
+            case 0:
+                piece = new IPentomino(new Coordonnees(2, 3), Couleur.CYAN);
+                break;
+            case 1:
+                piece = new TPentomino(new Coordonnees(2, 3), Couleur.BLEU);
+                break;
+            case 2:
+                piece = new UPentomino(new Coordonnees(2, 3), Couleur.GRIS);
+                break;
+            case 3:
+                piece = new VPentomino(new Coordonnees(2, 3), Couleur.ORANGE);
+                break;
+            case 4:
+                piece = new WPentomino(new Coordonnees(2, 3), Couleur.ROUGE);
+                break;
+            case 5:
+                piece = new XPentomino(new Coordonnees(2, 3), Couleur.VIOLET);
+                break;
+
+            case 6:
+                piece = new FPentomino(new Coordonnees(2, 3), Couleur.BLEU);
+                break;
+            case 7:
+                piece = new FPentominoM(new Coordonnees(2, 3), Couleur.ORANGE);
+                break;
+
+            case 8:
+                piece = new ZPentomino(new Coordonnees(2, 3), Couleur.VERT);
+                break;
+            case 9:
+                piece = new ZPentominoM(new Coordonnees(2, 3), Couleur.ROUGE);
+                break;
+
+            case 10:
+                piece = new LPentomino(new Coordonnees(2, 3), Couleur.BLEU);
+                break;
+            case 11:
+                piece = new LPentominoM(new Coordonnees(2, 3), Couleur.ORANGE);
+                break;
+
+            case 12:
+                piece = new YPentomino(new Coordonnees(2, 3), Couleur.CYAN);
+                break;
+            case 13:
+                piece = new YPentominoM(new Coordonnees(2, 3), Couleur.CYAN);
+                break;
+
+            case 14:
+                piece = new NPentomino(new Coordonnees(2, 3), Couleur.VERT);
+                break;
+            case 15:
+                piece = new NPentominoM(new Coordonnees(2, 3), Couleur.ROUGE);
+                break;
+
+            case 16:
+                piece = new PPentomino(new Coordonnees(2, 3), Couleur.JAUNE);
+                break;
+            case 17:
+                piece = new PPentominoM(new Coordonnees(2, 3), Couleur.JAUNE);
+                break;
+
+            default:
+                break;
+        }
         return piece;
     }
 

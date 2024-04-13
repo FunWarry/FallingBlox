@@ -2,6 +2,10 @@ package fr.eseo.e3.poo.projet.blox.modele;
 
 import java.awt.Color;
 
+/**
+ * Enumération des couleurs possibles pour les pièces
+ * @Modif extension pentominos
+ */
 public enum Couleur {
     ROUGE(Color.RED),
     ORANGE(Color.ORANGE),
@@ -9,7 +13,8 @@ public enum Couleur {
     VERT(Color.GREEN),
     JAUNE(Color.YELLOW),
     CYAN(Color.CYAN),
-    VIOLET(Color.MAGENTA),;
+    VIOLET(Color.MAGENTA),
+    GRIS(Color.GRAY); //modif pentominos
 
     private final Color couleurPourAffichage;
     private Couleur(Color couleurPourAffichage) {
