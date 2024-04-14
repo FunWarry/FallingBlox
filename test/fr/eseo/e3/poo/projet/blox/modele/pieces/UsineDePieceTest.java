@@ -45,6 +45,12 @@ public class UsineDePieceTest {
                 () -> assertInstanceOf(OTetromino.class, UsineDePiece.genererTetromino()),
                 () -> assertEquals(new Coordonnees(2,3), UsineDePiece.genererTetromino().getElements()[0].getCoordonnees())
         );
+        UsineDePiece.setMode(0);
+        UsineDePiece.genererTetromino();
+        UsineDePiece.setMode(1);
+        UsineDePiece.genererTetromino();
+
+
     }
 
 }

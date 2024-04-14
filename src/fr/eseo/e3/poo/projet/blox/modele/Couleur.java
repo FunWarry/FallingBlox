@@ -12,7 +12,8 @@ public enum Couleur {
     VIOLET(Color.MAGENTA),;
 
     private final Color couleurPourAffichage;
-    private Couleur(Color couleurPourAffichage) {
+
+    Couleur(Color couleurPourAffichage) {
         this.couleurPourAffichage = couleurPourAffichage;
     }
 

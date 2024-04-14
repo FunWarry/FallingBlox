@@ -76,7 +76,7 @@ public class UsineDePiece {
             case 0:
                 piece = new OTetromino(new Coordonnees(2, 3), Couleur.ROUGE);
                 break;
-            case 1:
+            default:
                 piece = new ITetromino(new Coordonnees(2, 3), Couleur.ORANGE);
                 break;
 //            case 2:
@@ -97,8 +97,6 @@ public class UsineDePiece {
 
 //            case 7:
 //                piece = new pentominos(new Coordonnees(2, 3), Couleur.ROSE);
-            default:
-                break;
         }
         progression = (progression + 1) % 2;
         return piece;

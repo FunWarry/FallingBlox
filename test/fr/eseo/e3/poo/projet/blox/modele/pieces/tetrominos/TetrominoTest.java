@@ -5,6 +5,7 @@ import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3.poo.projet.blox.modele.Element;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.BloxException;
+import fr.eseo.e3.poo.projet.blox.modele.Tas;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -88,7 +89,61 @@ public class TetrominoTest {
         puits.setPieceSuivante(tetromino);
         puits.getPieceActuelle().setPosition(0, 2);
         assertThrows(BloxException.class, () -> puits.getPieceActuelle().tourner(true));
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().tourner(false));
         assertThrows(BloxException.class, () -> puits.getPieceActuelle().deplacerDe(-1, 0));
+    }
+
+    @Test
+    @DisplayName("Test de getPuits")
+    void testGetPuits() {
+        Tetromino tetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
+        Puits puits = new Puits(10, 15);
+        tetromino.setPuits(puits);
+        assertEquals(puits, tetromino.getPuits());
+    }
+
+    @Test
+    @DisplayName("Test de deplacerA")
+    void testDeplacerA() {
+        Tetromino tetromino = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
+        assertDoesNotThrow(() -> tetromino.deplacerA(2, 2));
+    }
+
+    @Test
+    @DisplayName("Test de deplacerDe  et tourner sur toute les branches")
+    void testDeplacerDe() {
+        Puits puits = new Puits(10, 15);
+        Tetromino tetromino = new ITetromino(new Coordonnees(3, 3), Couleur.ROUGE);
+        Tetromino tetromino2 = new OTetromino(new Coordonnees(3, 3), Couleur.ROUGE);
+        Tas tas = new Tas(puits);
+        assertDoesNotThrow(() -> tetromino.tourner(true));
+        assertDoesNotThrow(() -> tetromino.tourner(false));
+        puits.setPieceSuivante(tetromino2);
+        puits.setPieceSuivante(tetromino);
+        puits.getPieceActuelle().setPosition(0, 14);
+        puits.gravite();
+        puits.setPieceSuivante(tetromino);
+        puits.getPieceActuelle().setPosition(1, 2);
+        assertDoesNotThrow(() -> tetromino.deplacerDe(1, 0));
+        assertDoesNotThrow(() -> tetromino.deplacerDe(-1, 0));
+        assertDoesNotThrow(() -> tetromino.deplacerDe(0, 1));
+        assertThrows(IllegalArgumentException.class, () -> tetromino.deplacerDe(0, -1));
+        puits.getPieceActuelle().setPosition(15, 2);
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().deplacerDe(1, 0));
+        puits.getPieceActuelle().setPosition(0, 2);
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().deplacerDe(-1, 0));
+        puits.getPieceActuelle().setPosition(0, 12);
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().deplacerDe(0, 1));
+        puits.getPieceActuelle().setPosition(2, 13);
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().tourner(true));
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().tourner(false));
+        puits.getPieceActuelle().setPosition(5, 5);
+        assertDoesNotThrow(() -> puits.getPieceActuelle().tourner(true));
+        assertDoesNotThrow(() -> puits.getPieceActuelle().tourner(false));
+        assertDoesNotThrow(() -> puits.getPieceActuelle().tourner(true));
+        puits.getPieceActuelle().setPosition(4, 15);
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().tourner(true));
+        assertThrows(BloxException.class, () -> puits.getPieceActuelle().tourner(false));
     }
 
 }

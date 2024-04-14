@@ -1,14 +1,16 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.OTetromino;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.Tetromino;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class PuitsTest {
 
@@ -83,7 +85,7 @@ public class PuitsTest {
         Puits puits = new Puits();
         Tetromino piece = new OTetromino(new Coordonnees(0, 0), Couleur.ROUGE);
         puits.setPieceSuivante(piece);
-        String expected = "Puits : Dimension 12 x 17\nPiece Actuelle : <aucune>" + "\nPiece Suivante : " + piece.toString();
+        String expected = "Puits : Dimension 10 x 20\nPiece Actuelle : <aucune>" + "\nPiece Suivante : " + piece.toString();
         assertEquals(expected, puits.toString());
     }
 
@@ -94,6 +96,33 @@ public class PuitsTest {
         Tas tas = new Tas(puits);
         puits.setTas(tas);
         assertEquals(tas, puits.getTas());
+    }
+
+    @Test
+    @DisplayName("Test de la méthode addPropertyChangeListener")
+    void addPropertyChangeListener() {
+        Puits puits = new Puits();
+        assertDoesNotThrow(() -> puits.addPropertyChangeListener(null));
+    }
+
+    @Test
+    @DisplayName("Test de la méthode removePropertyChangeListener")
+    void removePropertyChangeListener() {
+        Puits puits = new Puits();
+        assertDoesNotThrow(() -> puits.removePropertyChangeListener(null));
+    }
+
+    @Test
+    @DisplayName("Test de la méthode gravite")
+    void gravite() throws BloxException {
+        Puits puits = new Puits();
+        Piece piece = new OTetromino(new Coordonnees(5, 19), Couleur.ROUGE);
+        puits.setPieceSuivante(piece);
+        puits.setPieceSuivante(piece);
+        puits.getPieceActuelle().setPosition(5, 19);
+        puits.setTas(new Tas(puits));
+        assertDoesNotThrow(() -> puits.gravite());
+        assertThrows(BloxException.class, () ->  puits.getPieceActuelle().deplacerDe(0, 1));
     }
 
 

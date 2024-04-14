@@ -217,9 +217,7 @@ public class Puits {
         try {
             pieceActuelle.deplacerDe(0, 1);
         } catch (BloxException e) {
-            if(e.getType() == BloxException.BLOX_COLLISION){
-                gererCollision();
-            }
+            gererCollision();
         }
     }
 

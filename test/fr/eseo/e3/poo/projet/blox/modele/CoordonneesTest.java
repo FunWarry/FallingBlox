@@ -50,4 +50,22 @@ public class CoordonneesTest {
         assertTrue(coordonnees.equals(coordonnees2));
     }
 
+    @Test
+    @DisplayName("Test de la méthode equals mais le meme objet")
+    void testEqualsPasMemeObjet() {
+        assertTrue(coordonnees.equals(coordonnees));
+    }
+
+    @Test
+    @DisplayName("Test de la méthode equals mais pas la meme instance")
+    void testEqualsPasMemeInstance() {
+        assertFalse(coordonnees.equals(null));
+    }
+
+    @Test
+    @DisplayName("Test de la méthode hashCode")
+    void testHashCode() {
+        Coordonnees coordonnees2 = new Coordonnees(1, 2);
+        assertEquals(coordonnees.hashCode(), coordonnees2.hashCode());
+    }
 }
