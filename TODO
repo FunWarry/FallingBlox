@@ -29,6 +29,14 @@ echangé les pieces et repaint la vuepuits
 
 //CHECK
 
+extention vitesse
+
+ajouter un fire dans tas quand une ligne est supprimé pour changé la vitesse
+
+ajouter un listener dans gravité pour update la fréquance du timer
+
+//CHECK
+
 extension pentominos
 
 faire une classe pentomino qui hérite de piece
@@ -41,4 +49,8 @@ faire en sorte que la piece suivante soit un pentomino quand on change de diffic
 
 //TODO :
 
-REPARATION GRAVITE, n'arrive pas a capté les événement de changement de vitesse
+extension dessente rapide
+
+ajouter un listener de touche pour descendre la piece rapidement (clique mollette)
+
+modiffier VuePuits pour afficher la piece en train de descendre rapidement

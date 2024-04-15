@@ -8,6 +8,8 @@ import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
+import static javax.swing.SwingUtilities.isMiddleMouseButton;
+
 public class PieceDeplacement extends MouseAdapter {
 
     private VuePuits vuePuits;
@@ -79,4 +81,26 @@ public class PieceDeplacement extends MouseAdapter {
         }
         vuePuits.repaint();
     }
+
+    /**
+     * Methode permettant de deplacer la piece directement en bas
+     * @param event evenement souris
+     * @since extension descente instantanée
+     */
+    public void mouseClicked(MouseEvent event) {
+        if (puits.getPieceActuelle() != null) {
+            if(isMiddleMouseButton(event)){
+                while (true) {
+                    try {
+                        System.out.println("test descente");
+                        puits.getPieceActuelle().deplacerDe(0, 1);
+                    } catch (BloxException e) {
+                        break;
+                    }
+                }
+            }
+        }
+        vuePuits.repaint();
+    }
+
 }
