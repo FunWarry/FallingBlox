@@ -17,6 +17,7 @@ public enum Couleur {
     GRIS(Color.GRAY); //modif pentominos
 
     private final Color couleurPourAffichage;
+
     private Couleur(Color couleurPourAffichage) {
         this.couleurPourAffichage = couleurPourAffichage;
     }

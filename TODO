@@ -19,7 +19,6 @@ ajouter un texte pour afficher la vitesse dans PanneauInformation
 
 //CHECK
 
-//TODO
 extension échange entre la pièce actuelle et la pièce suivante
 
 faire un nouveau controller avec un listener de la roulette de la souris
@@ -28,3 +27,18 @@ gérer les exception pendant le changement de la piece
 
 echangé les pieces et repaint la vuepuits
 
+//CHECK
+
+extension pentominos
+
+faire une classe pentomino qui hérite de piece
+
+modifier l'usine de piece
+
+faire en sorte que la piece suivante soit un pentomino quand on change de difficulté
+
+//CHECK
+
+//TODO :
+
+REPARATION GRAVITE, n'arrive pas a capté les événement de changement de vitesse

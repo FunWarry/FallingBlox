@@ -36,7 +36,6 @@ public class EchangePiece extends MouseAdapter {
             if(event.getWheelRotation() < 0) {
                 try {
                     puits.setEchangePiece();
-                    puits.getPieceSuivante().setPosition(2,3);
                 } catch (BloxException e) {
                     System.err.println("échange de piece impossible");
                 }

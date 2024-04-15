@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
+import fr.eseo.e3.poo.projet.blox.modele.pieces.UsineDePiece;
 
 public class Tas {
     // puits
@@ -39,13 +40,19 @@ public class Tas {
      * Compteur de ligne effectuée
      * @since extension vitesse
      */
-    private int ligneEffectuee = 0;
+    private int ligneEffectuee = 9;
 
     /**
      * Constante de message de changement de vitesse
      * @since extension vitesse
      */
     public static final String CHANGEMENT_VITESSE = "changement vitesse";
+
+    /**
+     * Constante de message de changement du nombre de lignes
+     * @since extension vitesse
+     */
+    public static final String CHANGEMENT_NOMBRE_LIGNES = "changement nombre lignes";
 
     /**
      * Vitesse
@@ -168,6 +175,8 @@ public class Tas {
     /**
      * Methode permetant d'ajoouter un element
      * @param piece contenant les éléments a ajouter
+     * @Modif score
+     * @Modif ligneEffectuee
      */
     public void ajouterElements(Piece piece) {
         elements.addAll(Arrays.asList(piece.getElements()));
@@ -178,12 +187,12 @@ public class Tas {
         for (Element element : piece.getElements()) {
             int y = element.getCoordonnees().getOrdonnee();
             if (elements.stream().filter(e -> e.getCoordonnees().getOrdonnee() == y).count() == puits.getLargeur()) {
+                ligneEffectuee ++;
                 supprimerLigne(y);
                 ligneSupprimee++;
             }
         }
-        ligneEffectuee += ligneSupprimee;
-        pcs.firePropertyChange(CHANGEMENT_VITESSE, this.vitesse, 1 + 0.2*(int)(ligneEffectuee/10) );
+
         switch (ligneSupprimee) {
             case 1:
                 pcs.firePropertyChange(AJOUT_SCORE, this.score, this.score + 10*puits.getLargeur());
@@ -205,6 +214,9 @@ public class Tas {
     /**
      * Methode permetant de supprimer une ligne
      * @param y l'ordonnee de la ligne a supprimer
+     * @Modif ligneEffectuee
+     * @Modif vitesse
+     * @Modif pentomino
      */
     public void supprimerLigne(int y) {
         elements.removeIf(element -> element.getCoordonnees().getOrdonnee() == y);
@@ -212,6 +224,13 @@ public class Tas {
             if (element.getCoordonnees().getOrdonnee() < y) {
                 elements.get(elements.indexOf(element)).deplacerDe(0, 1);
             }
+        }
+        pcs.firePropertyChange(CHANGEMENT_NOMBRE_LIGNES, this.ligneEffectuee, this.ligneEffectuee + 1);
+        if (ligneEffectuee % 10 == 0) {
+            double newSpeed = 1 + 0.2*(int)(ligneEffectuee/10);
+            pcs.firePropertyChange(CHANGEMENT_VITESSE, this.vitesse, newSpeed);
+            this.vitesse = newSpeed;
+            puits.setPieceSuivante(UsineDePiece.genererPentomino());
         }
     }
 

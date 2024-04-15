@@ -1,5 +1,6 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
+import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
@@ -52,6 +53,12 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
     private double vitesse = 1;
 
     /**
+     *nombre de lignes effectuées
+     * @since extension pentominos
+     */
+    private int ligneEffectuee = 0;
+
+    /**
      * constante de classe pour identifier qu'un score a ete ajouté
      * @since extension score
      */
@@ -87,6 +94,10 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
             this.vitesse = (double) evt.getNewValue();
             this.repaint();
         }
+        if (evt.getPropertyName().equals(Tas.CHANGEMENT_NOMBRE_LIGNES)){
+            this.ligneEffectuee = (int) evt.getNewValue();
+            this.repaint();
+        }
     }
     /**
      * Méthode permettant de mettre à jour le panneau d'information
@@ -114,6 +125,13 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
         g2D.drawString("Speed : ", 10, 150);
         g2D.setFont(new java.awt.Font("Arial", Font.PLAIN, 10));
         g2D.drawString("X" + this.vitesse, 10, 170);
+
+        //ajout du nombre de lignes effectuées
+        g2D.setColor(java.awt.Color.BLACK);
+        g2D.setFont(new java.awt.Font("Arial", java.awt.Font.BOLD, 16));
+        g2D.drawString("Lines : ", 10, 200);
+        g2D.setFont(new java.awt.Font("Arial", Font.PLAIN, 10));
+        g2D.drawString(Integer.toString(this.ligneEffectuee), 10, 220);
 
         g2D.dispose();
     }

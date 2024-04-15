@@ -6,6 +6,7 @@ import fr.eseo.e3.poo.projet.blox.vue.VuePuits;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.Timer;
 
@@ -31,6 +32,7 @@ public class Gravite implements ActionListener, PropertyChangeListener {
     /**
      * Constructeur de la classe Gravite
      * @param vuePuits la vue du puits
+     * @Modif extension vitesse
      */
     public Gravite(VuePuits vuePuits) {
         this.vuePuits = vuePuits;
@@ -39,6 +41,7 @@ public class Gravite implements ActionListener, PropertyChangeListener {
         this.periodicite = 1000;
         this.timer = new Timer(periodicite, this);
         this.timer.start();
+        this.tas.addPropertyChangeListener(this);//extension vitesse
     }
 
     /**
@@ -71,7 +74,7 @@ public class Gravite implements ActionListener, PropertyChangeListener {
      * @param event l'action
      * @since extension vitesse
      */
-    public void propertyChange(java.beans.PropertyChangeEvent event) {
+    public void propertyChange(PropertyChangeEvent event) {
         if (event.getPropertyName().equals(Tas.CHANGEMENT_VITESSE)) {
             setPeriodicite((int) (1000 / (double) event.getNewValue()));
         }
