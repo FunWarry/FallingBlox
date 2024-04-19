@@ -29,5 +29,4 @@ bin/
 .DS_Store
 
 ### Google Cloud Platform ###
-desktop.ini
 /.idea/icon.svg
