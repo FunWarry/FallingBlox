@@ -49,6 +49,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
 
     /**
      * Constructeur de la classe VuePuits
+     * @param puits puits à lier
      */
     public VuePuits (Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);

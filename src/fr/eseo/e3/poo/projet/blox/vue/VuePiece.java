@@ -36,6 +36,7 @@ public class VuePiece {
 
     /**
      * Fonction de modification de la couleur
+     * @param couleur couleur à teinter
      * @return la couleur teintée
      */
     public static Color teinte(Color couleur) {
@@ -45,6 +46,10 @@ public class VuePiece {
         return new Color((int)r, (int)g, (int)b);
     }
 
+    /**
+     * Fonction d'affichage de la piece
+     * @param g2D Graphics2D
+     */
     public void afficherPiece(Graphics2D g2D){
         for(int i = 0; i < piece.getElements().length; i++){
             if(i != 0){

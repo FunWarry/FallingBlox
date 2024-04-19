@@ -16,10 +16,10 @@ public class Tas {
 
     /**
      * Constructeur de la classe Tas
-     * @Param puits le puits
-     * @Param nbElement le nombre d'elements
-     * @Param nbLignes le nombre de lignes
-     * @Param rand un Random
+     * @param puits le puits
+     * @param nbElements le nombre d'elements
+     * @param nbLignes le nombre de lignes
+     * @param rand un Random
      */
     public Tas(Puits puits, int nbElements, int nbLignes, Random rand) {
         this.puits = puits;
@@ -35,9 +35,9 @@ public class Tas {
 
     /**
      * Constructeur de la classe Tas
-     * @Param puits le puits
-     * @Param nbElement le nombre d'elements
-     * @Param nbLignes le nombre de lignes
+     * @param puits le puits
+     * @param nbElements le nombre d'elements
+     * @param nbLignes le nombre de lignes
      */
     public Tas(Puits puits, int nbElements, int nbLignes) {
         this(puits, nbElements, nbLignes, new Random());
@@ -45,8 +45,8 @@ public class Tas {
 
     /**
      * Constructeur de la classe Tas
-     * @Param puits le puits
-     * @Param nbElement le nombre d'elements
+     * @param puits le puits
+     * @param nbElements le nombre d'elements
      */
     public Tas(Puits puits, int nbElements) {
         this(puits, nbElements, (nbElements/puits.getLargeur()) + 1);
@@ -54,7 +54,7 @@ public class Tas {
 
     /**
      * Constructeur de la classe Tas
-     * @Param puits le puits
+     * @param puits le puits
      */
     public Tas(Puits puits) {
         this(puits, 0);

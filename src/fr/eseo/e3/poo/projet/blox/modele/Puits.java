@@ -188,7 +188,7 @@ public class Puits {
 
     /**
      * Methode permettant d'ajouter un listener
-     * @param listener
+     * @param listener le listener
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
@@ -196,7 +196,7 @@ public class Puits {
 
     /**
      * Methode permettant de supprimer un listener
-     * @param listener
+     * @param listener le listener
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);
