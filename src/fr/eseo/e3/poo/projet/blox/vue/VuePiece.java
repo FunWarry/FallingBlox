@@ -5,27 +5,31 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+/**
+ * Classe VuePiece
+ * Cette classe est la vue d'une piece
+ */
 public class VuePiece {
 
     /**
-     * constante du multiplicateur de la teinte
-     * compris entre 0 et 1
+     * Constante du multiplicateur de la teinte
+     * Compris entre 0 et 1.
      */
     public static final double MULTIPLIER_TEINTE = 0.3;
 
     /**
-     * Constante privé de la taille immuable
+     * Constante privée de la taille immuable
      */
     private final int taille;
 
     /**
-     * Piece a afficher
+     * Piece à afficher
      */
     private final Piece piece;
 
     /**
      * Constructeur de la classe VuePiece
-     * @param piece piece a afficher
+     * @param piece piece à afficher
      * @param taille taille de la piece
      *
      */
@@ -36,6 +40,7 @@ public class VuePiece {
 
     /**
      * Fonction de modification de la couleur
+     * @param couleur couleur à teinter
      * @return la couleur teintée
      */
     public static Color teinte(Color couleur) {
@@ -45,6 +50,10 @@ public class VuePiece {
         return new Color((int)r, (int)g, (int)b);
     }
 
+    /**
+     * Fonction d'affichage de la piece
+     * @param g2D le contexte graphique
+     */
     public void afficherPiece(Graphics2D g2D) {
         for (int i = 0; i < piece.getElements().length; i++) {
             if (i != 0) {

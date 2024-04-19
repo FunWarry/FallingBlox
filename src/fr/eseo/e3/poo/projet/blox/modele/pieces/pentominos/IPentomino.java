@@ -4,12 +4,27 @@ import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos.Tetromino;
 
+/**
+ * Classe FPentominoM
+ * Cette classe permet de définir la piece F
+ * @since extension pentominos
+ */
 public class IPentomino extends Pentomino {
 
+    /**
+     * Constructeur de la classe IPentomino
+     * @param coordonnees Coordonnees de la piece
+     * @param couleur Couleur de la piece
+     */
     public IPentomino(Coordonnees coordonnees, Couleur couleur){
         super(coordonnees, couleur);
     }
 
+    /**
+     * Méthode permettant de placer les elements de la piece
+     * @param coordonnees Coordonnées de la piece
+     * @param couleur Couleur de la piece
+     */
     @Override
     protected void setElements(Coordonnees coordonnees, Couleur couleur) {
         for(int i = 0; i < 5; i++){

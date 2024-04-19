@@ -1,13 +1,23 @@
 package fr.eseo.e3.poo.projet.blox.modele;
 
+/**
+ * Classe BloxException
+ * Cette classe permet de gérer les exceptions du jeu quand on rentre en collision avec une piece ou qu'on sort du puits
+ */
 public class BloxException extends Exception{
-    //exception de collision
+    /**
+     * Constantes de la classe BloxException
+     */
     public static final int BLOX_COLLISION = 0;
 
-    //exception de sortie du puits
+    /**
+     * Constantes de la classe BloxException
+     */
     public static final int BLOX_SORTIE_PUITS = 1;
 
-    //type de l'exception
+    /*
+     * Attribut pour le type de l'exception
+     */
     private int type;
 
     /**

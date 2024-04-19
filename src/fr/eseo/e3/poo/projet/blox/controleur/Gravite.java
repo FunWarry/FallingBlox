@@ -10,17 +10,29 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.Timer;
 
+/**
+ * La classe Gravite
+ * @since modification pour extension vitesse
+ */
 public class Gravite implements ActionListener, PropertyChangeListener {
-    //timer
+    /**
+     * timer
+     */
     private Timer timer;
 
-    //periode
+    /**
+     * periodicite
+     */
     private int periodicite;
 
-    //vuePuits
+    /*
+     * vuePuits
+     */
     private final VuePuits vuePuits;
 
-    //puits
+    /**
+     * puits
+     */
     private final Puits puits;
 
     /**
@@ -32,7 +44,7 @@ public class Gravite implements ActionListener, PropertyChangeListener {
     /**
      * Constructeur de la classe Gravite
      * @param vuePuits la vue du puits
-     * @Modif extension vitesse
+     * @since modiffication pour extension vitesse
      */
     public Gravite(VuePuits vuePuits) {
         this.vuePuits = vuePuits;
@@ -45,15 +57,16 @@ public class Gravite implements ActionListener, PropertyChangeListener {
     }
 
     /**
-     * getter de la Periodicite
+     * getter de la période
+     * @return la période
      */
     public int getPeriodicite() {
         return periodicite;
     }
 
     /**
-     * setter de la Periodicite
-     * @param periode la periodicite
+     * Setter de la période
+     * @param periode la période
      */
     public void setPeriodicite(int periode) {
         this.periodicite = periode;

@@ -3,12 +3,27 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces.pentominos;
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 
+/**
+ * Classe YPentomino
+ * Cette classe permet de définir la piece Y
+ * @since extension pentominos
+ */
 public class YPentomino extends Pentomino {
 
+    /**
+     * Constructeur de la classe YPentomino
+     * @param coordonnees Coordonnees de la piece
+     * @param couleur Couleur de la piece
+     */
     public YPentomino(Coordonnees coordonnees, Couleur couleur){
         super(coordonnees, couleur);
     }
 
+    /**
+     * Méthode permettant de placer les elements de la piece
+     * @param coordonnees Coordonnées de la piece
+     * @param couleur Couleur de la piece
+     */
     @Override
     protected void setElements(Coordonnees coordonnees, Couleur couleur) {
         for(int i = 0; i < 5; i++){

@@ -3,12 +3,27 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces.pentominos;
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 
+/**
+ * Classe FPentominoM
+ * Cette classe permet de définir la piece F mirroir
+ * @since extension pentominos
+ */
 public class FPentominoM extends Pentomino {
 
+    /**
+     * Constructeur de la classe FPentomino
+     * @param coordonnees Coordonnees de la piece
+     * @param couleur Couleur de la piece
+     */
     public FPentominoM(Coordonnees coordonnees, Couleur couleur){
         super(coordonnees, couleur);
     }
 
+    /**
+     * Méthode permettant de placer les elements de la piece
+     * @param coordonnees Coordonnées de la piece
+     * @param couleur Couleur de la piece
+     */
     @Override
     protected void setElements(Coordonnees coordonnees, Couleur couleur) {
         for(int i = 0; i < 5; i++){

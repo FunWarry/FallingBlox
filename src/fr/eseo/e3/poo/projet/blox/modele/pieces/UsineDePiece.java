@@ -16,7 +16,7 @@ import java.util.Random;
 
 /**
  * Usine de pièces
- * @Modif extension pentominos
+ * @version modiffication pour extension pentominos
  */
 public class UsineDePiece {
     /**
@@ -117,6 +117,10 @@ public class UsineDePiece {
         return piece;
     }
 
+    /**
+     * Methode pour generer des pentominos
+     * @return une pièce
+     */
     public static Pentomino genererPentomino() {
         int switchPento = new Random().nextInt(18);
 

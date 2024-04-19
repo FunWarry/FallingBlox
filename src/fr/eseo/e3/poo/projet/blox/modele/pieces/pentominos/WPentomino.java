@@ -3,12 +3,27 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces.pentominos;
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 
+/**
+ * Classe WPentomino
+ * Cette classe permet de définir la piece W
+ * @since extension pentominos
+ */
 public class WPentomino extends Pentomino {
 
+    /**
+     * Constructeur de la classe WPentomino
+     * @param coordonnees Coordonnees de la piece
+     * @param couleur Couleur de la piece
+     */
     public WPentomino(Coordonnees coordonnees, Couleur couleur){
         super(coordonnees, couleur);
     }
 
+    /**
+     * Méthode permettant de placer les elements de la piece
+     * @param coordonnees Coordonnées de la piece
+     * @param couleur Couleur de la piece
+     */
     @Override
     protected void setElements(Coordonnees coordonnees, Couleur couleur) {
         for(int i = 0; i < 5; i++){

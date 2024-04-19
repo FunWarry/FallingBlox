@@ -11,11 +11,19 @@ import java.util.List;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.UsineDePiece;
 
+/**
+ * Classe Tas
+ * Cette classe est les colones d'éléments du jeu
+ */
 public class Tas {
-    // puits
+    /**
+     * Puits
+     */
     private Puits puits;
 
-    //elements
+    /**
+     * Liste d'Elements
+     */
     private List<Element> elements;
 
     /**
@@ -61,10 +69,10 @@ public class Tas {
 
     /**
      * Constructeur de la classe Tas
-     * @Param puits le puits
-     * @Param nbElement le nombre d'elements
-     * @Param nbLignes le nombre de lignes
-     * @Param rand un Random
+     * @param puits le puits
+     * @param nbElements le nombre d'elements
+     * @param nbLignes le nombre de lignes
+     * @param rand un Random
      */
     public Tas(Puits puits, int nbElements, int nbLignes, Random rand) {
         this.puits = puits;
@@ -81,9 +89,9 @@ public class Tas {
 
     /**
      * Constructeur de la classe Tas
-     * @Param puits le puits
-     * @Param nbElement le nombre d'elements
-     * @Param nbLignes le nombre de lignes
+     * @param puits le puits
+     * @param nbElements le nombre d'éléments
+     * @param nbLignes le nombre de lignes
      */
     public Tas(Puits puits, int nbElements, int nbLignes) {
         this(puits, nbElements, nbLignes, new Random());
@@ -91,8 +99,8 @@ public class Tas {
 
     /**
      * Constructeur de la classe Tas
-     * @Param puits le puits
-     * @Param nbElement le nombre d'elements
+     * @param puits le puits
+     * @param nbElements le nombre d'éléments
      */
     public Tas(Puits puits, int nbElements) {
         this(puits, nbElements, (nbElements/puits.getLargeur()) + 1);
@@ -100,7 +108,7 @@ public class Tas {
 
     /**
      * Constructeur de la classe Tas
-     * @Param puits le puits
+     * @param puits le puits
      */
     public Tas(Puits puits) {
         this(puits, 0);
@@ -141,8 +149,8 @@ public class Tas {
     }
 
     /**
-     * Methode permetant de construire un tas
-     * @param nbElements le nombre d'elements
+     * Methode pérmettant de construire un tas
+     * @param nbElements le nombre d'éléments
      * @param nbLignes le nombre de lignes
      * @param rand un Random
      */
@@ -160,8 +168,8 @@ public class Tas {
     /**
      * Methode permettant de savoir si un element existe
      * @param x l'abscisse
-     * @param y l'ordonnee
-     * @return true si l'element existe, false sinon
+     * @param y l'ordonnée
+     * @return true si l'élément existe, false sinon
      */
     public boolean elementExists(int x, int y) {
         for (Element element : elements) {
@@ -173,10 +181,10 @@ public class Tas {
     }
 
     /**
-     * Methode permetant d'ajoouter un element
-     * @param piece contenant les éléments a ajouter
-     * @Modif score
-     * @Modif ligneEffectuee
+     * Methode pérmettant d'ajouter un element
+     * @param piece contenant les éléments à ajouter
+     * @since modification pour extension score
+     * @since modification pour extension ligneEffectuee
      */
     public void ajouterElements(Piece piece) {
         elements.addAll(Arrays.asList(piece.getElements()));
@@ -212,11 +220,11 @@ public class Tas {
     }
 
     /**
-     * Methode permetant de supprimer une ligne
-     * @param y l'ordonnee de la ligne a supprimer
-     * @Modif ligneEffectuee
-     * @Modif vitesse
-     * @Modif pentomino
+     * Methode pérmettant de supprimer une ligne
+     * @param y l'ordonnée de la ligne à supprimer
+     * @since modification pour extension ligneEffectuee
+     * @since modification pour extension vitesse
+     * @since modification pour extension pentomino
      */
     public void supprimerLigne(int y) {
         elements.removeIf(element -> element.getCoordonnees().getOrdonnee() == y);
@@ -236,7 +244,7 @@ public class Tas {
 
     /**
      * Methode permettant d'ajouter un listener
-     * @param listener
+     * @param listener le listener
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
@@ -244,7 +252,7 @@ public class Tas {
 
     /**
      * Methode permettant de supprimer un listener
-     * @param listener
+     * @param listener le listener
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);

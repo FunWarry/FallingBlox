@@ -3,12 +3,27 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces.tetrominos;
 import fr.eseo.e3.poo.projet.blox.modele.Coordonnees;
 import fr.eseo.e3.poo.projet.blox.modele.Couleur;
 
+/**
+ * Classe LTetromino
+ * Cette classe permet de définir les pièces de type LTetromino
+ * @since extension tetrominos
+ */
 public class LTetromino extends Tetromino{
 
+    /**
+     * Constructeur de la classe LTetromino
+     * @param coordonnees Coordonnees de la piece
+     * @param couleur Couleur de la piece
+     */
     public LTetromino(Coordonnees coordonnees, Couleur couleur){
         super(coordonnees, couleur);
     }
 
+    /**
+     * Méthode permettant de placer les elements de la piece
+     * @param coordonnees Coordonnees de la piece
+     * @param couleur Couleur de la piece
+     */
     @Override
     protected void setElements(Coordonnees coordonnees, Couleur couleur) {
         this.getElements()[0].setCoordonnees(coordonnees);

@@ -7,6 +7,11 @@ import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 
+/**
+ * Classe Tetromino
+ * Cette classe permet de définir les pièces de type Tetromino
+ * @since extension tetrominos
+ */
 public abstract class Tetromino implements Piece {
     /**
      * Elements de la piece
@@ -88,6 +93,7 @@ public abstract class Tetromino implements Piece {
      * Methode permettant de deplacer un tetromino
      * @param deltaX deplacement en abscisse
      * @param deltaY deplacement en ordonnee
+     * @throws BloxException si le déplacement est impossible
      */
     public void deplacerDe(int deltaX, int deltaY) throws BloxException{
         if(deltaY < 0 || deltaX > 1 || deltaX < -1 || deltaY > 1){
@@ -126,6 +132,7 @@ public abstract class Tetromino implements Piece {
      * Methode permettant de deplacer la piece avec l'exception de collision
      * @throws BloxException si la piece est en collision
      * @since extension échange piece
+     * @throws BloxException si le déplacement est impossible
      */
     public void echangeException() throws BloxException{
         for (Element element : elements) {
@@ -141,7 +148,9 @@ public abstract class Tetromino implements Piece {
 
     /**
      * Methode permettant de tourner un tetromino
+     * true pour tourner dans le sens horaire
      * @param sensHoraire sens de rotation
+     * @throws BloxException si la rotation est impossible
      */
     public void tourner(boolean sensHoraire) throws BloxException{
         int oldX = elements[0].getCoordonnees().getAbscisse();

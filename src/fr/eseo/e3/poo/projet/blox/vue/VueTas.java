@@ -5,17 +5,30 @@ import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+/**
+ * Classe VueTas
+ * Cette classe est la vue du tas
+ */
 public class VueTas {
-    //Tas
+    /**
+     * Tas
+     */
     private final Tas tas;
 
-    //VuePuits
+    /**
+     * VuePuits
+     */
     private final VuePuits vuePuits;
 
-    // constantes d'assombrissement
+    /**
+     * Constante du multiplicateur de la nuance
+     * Compris entre 0 et 1.
+     */
     public static final double MULTIPLIER_NUANCE = 0.4;
 
-    //Taille
+    /**
+     * Taille
+     */
     private int taille;
 
     /**

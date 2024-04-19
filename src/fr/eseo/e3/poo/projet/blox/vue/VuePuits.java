@@ -15,6 +15,10 @@ import javax.swing.JPanel;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Classe VuePuits
+ * Cette classe est la vue du puit
+ */
 public class VuePuits extends JPanel implements PropertyChangeListener {
     /**
      * puit a afficher
@@ -22,12 +26,12 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     private Puits puits;
 
     /**
-     * constante de la taille du puit par defaut
+     * Constante de la taille du puits par default
      */
     public static final int TAILLE_PAR_DEFAUT = 15;
 
     /**
-     * taille du puit
+     * Taille du puits
      */
     private int taille;
 
@@ -36,10 +40,14 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      */
     private VuePiece vuePiece;
 
-    // PieceDeplacement
+    /**
+     * PieceDeplacement
+     */
     PieceDeplacement pieceDeplacement;
 
-    // PieceRotation
+    /**
+     * PieceRotation
+     */
     PieceRotation pieceRotation;
 
     /**
@@ -48,14 +56,19 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
      */
     EchangePiece echangePiece;
 
-    // VueTas
+    /**
+     * VueTas
+     */
     private final VueTas vueTas;
 
-    //gravite
+    /**
+     * Gravite
+     */
     private Gravite gravite;
 
     /**
      * Constructeur de la classe VuePuits
+     * @param puits puits à afficher
      */
     public VuePuits (Puits puits) {
         this(puits, TAILLE_PAR_DEFAUT);
@@ -89,7 +102,7 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     /**
      * Methode permettant de definir le puit
      * @param puits le puit
-     * @Modif échange piece
+     * @since modification pour extension échange piece
      */
     public void setPuits(Puits puits) {
         if(this.puits != null) {
@@ -194,6 +207,10 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
         g2D.dispose();
     }
 
+    /**
+     * Méthode permettant de mettre à jour la pièce actuelle affichée
+     * @param event evenement de changement de propriété
+     */
     @Override
     public void propertyChange(PropertyChangeEvent event) {
         if(event.getPropertyName().equals(Puits.MODIFICATION_PIECE_ACTUELLE)) {
@@ -208,6 +225,5 @@ public class VuePuits extends JPanel implements PropertyChangeListener {
     public VueTas getVueTas() {
         return this.vueTas;
     }
-
 
 }

@@ -6,9 +6,20 @@ import fr.eseo.e3.poo.projet.blox.modele.pieces.UsineDePiece;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * Classe Puits
+ * Cette classe est le puit du jeu
+ */
 public class Puits {
+
+    /**
+     * Attributs de la classe Puits
+     */
     private Tas tas;
 
+    /**
+     * PropertyChangeSupport
+     */
     private PropertyChangeSupport pcs;
 
     /**
@@ -32,7 +43,7 @@ public class Puits {
     public static final int PROFONDEUR_PAR_DEFAUT = 20;
 
     /**
-     * Dimension plateau
+     * Dimension du puits
      */
     private int largeur;
     private int profondeur;
@@ -107,7 +118,7 @@ public class Puits {
     }
 
     /**
-     * MEthode permetant de modifier la piece suivante en gradant la position de la piece actuelle
+     * Méthode permettant de modifier la piece suivante en gardant la position de la piece actuelle
      * @throws NullPointerException si la piece suivante est null
      * @throws BloxException si la piece suivante est en collision
      * @since extension échange piece
@@ -129,7 +140,7 @@ public class Puits {
     }
 
     /**
-     * Methode permettant de récuperer la largeur du puits
+     * Methode permettant de récupérer la largeur du puits
      * @return la largeur du puits
      */
     public int getLargeur() {
@@ -207,7 +218,7 @@ public class Puits {
 
     /**
      * Methode permettant d'ajouter un listener
-     * @param listener
+     * @param listener le listener
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         pcs.addPropertyChangeListener(listener);
@@ -215,7 +226,7 @@ public class Puits {
 
     /**
      * Methode permettant de supprimer un listener
-     * @param listener
+     * @param listener le listener
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         pcs.removePropertyChangeListener(listener);

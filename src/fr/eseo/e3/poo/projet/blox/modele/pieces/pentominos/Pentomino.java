@@ -3,6 +3,11 @@ package fr.eseo.e3.poo.projet.blox.modele.pieces.pentominos;
 import fr.eseo.e3.poo.projet.blox.modele.*;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
 
+/**
+ * Classe abstraite Pentomino
+ * Cette classe permet de définir les méthodes et les attributs communs à tous les pentominosz
+ * @since extension pentominos
+ */
 public abstract class Pentomino implements Piece {
     /**
      * Elements de la piece
@@ -28,7 +33,7 @@ public abstract class Pentomino implements Piece {
     }
 
     /**
-     * Méthode permettant de recuperer les elements de la piece
+     * Méthode permettant de récupérer les elements de la piece
      * @return une liste des elements de la piece
      */
     public Element[] getElements(){
@@ -37,7 +42,7 @@ public abstract class Pentomino implements Piece {
 
     /**
      * Méthode permettant de placer les elements de la piece
-     * @param coordonnees Coordonnees de la piece
+     * @param coordonnees Coordonnées de la piece
      * @param couleur Couleur de la piece
      */
     protected abstract void setElements(Coordonnees coordonnees, Couleur couleur);
@@ -52,7 +57,7 @@ public abstract class Pentomino implements Piece {
     }
 
     /**
-     * Méthode permettant de récupérer le puit.
+     * Méthode permettant de récupérer le puits.
      * @return le puits du jeu
      */
     public Puits getPuits(){
@@ -84,6 +89,7 @@ public abstract class Pentomino implements Piece {
      * Methode permettant de deplacer un tetromino
      * @param deltaX deplacement en abscisse
      * @param deltaY deplacement en ordonnee
+     * @throws BloxException si le déplacement est impossible
      */
     public void deplacerDe(int deltaX, int deltaY) throws BloxException{
         if(deltaY < 0 || deltaX > 1 || deltaX < -1 || deltaY > 1){
@@ -137,7 +143,9 @@ public abstract class Pentomino implements Piece {
 
     /**
      * Methode permettant de tourner un tetromino
+     * true pour sens horaire, false pour sens anti-horaire
      * @param sensHoraire sens de rotation
+     * @throws BloxException si la rotation est impossible
      */
     public void tourner(boolean sensHoraire) throws BloxException{
         int oldX = elements[0].getCoordonnees().getAbscisse();

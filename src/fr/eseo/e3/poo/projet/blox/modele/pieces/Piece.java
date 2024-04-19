@@ -7,6 +7,7 @@ import fr.eseo.e3.poo.projet.blox.modele.BloxException;
 public interface Piece {
     /**
      * Elements des pieces
+     * @return les elements de la piece
      */
     public Element[] getElements();
 
@@ -33,15 +34,22 @@ public interface Piece {
      * Methode permettant de deplacer un element
      * @param deltaX deplacement en abscisse
      * @param deltaY deplacement en ordonnee
+     * @throws BloxException si la piece est en collision
      */
     public void deplacerDe(int deltaX, int deltaY) throws BloxException;
 
     /**
      * Methode permettant de tourner la piece
      * @param sensHoraire sens de rotation
+     * @throws BloxException si la piece est en collision
      */
     public void tourner(boolean sensHoraire) throws BloxException;
 
+    /**
+     * Methode permettant de deplacer la piece
+     * @param x abscisse
+     * @param y ordonnee
+     */
     public void deplacerA(int x, int y);
 
     /**

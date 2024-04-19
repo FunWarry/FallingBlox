@@ -1,6 +1,5 @@
 package fr.eseo.e3.poo.projet.blox.vue;
 
-import fr.eseo.e3.poo.projet.blox.controleur.Gravite;
 import fr.eseo.e3.poo.projet.blox.modele.Puits;
 import fr.eseo.e3.poo.projet.blox.modele.Tas;
 import fr.eseo.e3.poo.projet.blox.modele.pieces.Piece;
@@ -15,17 +14,32 @@ import java.awt.Font;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Classe PanneauInformation
+ * Cette classe est le panneau d'information du jeu
+ * @since extension score
+ * @since extension vitesse
+ * @since extension pentominos
+ */
 public class PanneauInformation extends JPanel implements PropertyChangeListener {
-    //puits du jeu
+    /*
+     * Puits
+     */
     private Puits puits;
 
-    //VuePiece
+    /*
+     * VuePiece
+     */
     private VuePiece vuePiece;
 
-    //constente de la taille du panneau
+    /*
+     * Constante de taille
+     */
     private static final int TAILLE = 70;
 
-    //constructeur modification piece suivante
+    /*
+     * Constante de classe pour identifier qu'une piece a ete modifiée
+     */
     public static final String MODIFICATION_PIECE_SUIVANTE = "modif piece suivante";
 
     /**
@@ -41,7 +55,7 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
     private int score = 0;
 
     /**
-     * constante de classe pour identifier qu'un score a ete ajouté
+     * Constante de classe pour identifier qu'un score a ete ajouté
      * @since extension score
      */
     public static final String AJOUT_SCORE = "ajout score";
@@ -53,13 +67,13 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
     private double vitesse = 1;
 
     /**
-     *nombre de lignes effectuées
+     * Nombre de lignes effectuées
      * @since extension pentominos
      */
     private int ligneEffectuee = 0;
 
     /**
-     * constante de classe pour identifier qu'un score a ete ajouté
+     * Constante de classe pour identifier qu'un score a ete ajouté
      * @since extension score
      */
     public static final String CHANGEMENT_VITESSE = "changement vitesse";
@@ -80,6 +94,7 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
 
     /**
      * Méthode permettant de mettre à jour le panneau d'information
+     * @param evt evenement de changement de propriété
      */
     public void propertyChange(PropertyChangeEvent evt){
         if(evt.getPropertyName().equals(MODIFICATION_PIECE_SUIVANTE)){
@@ -99,11 +114,12 @@ public class PanneauInformation extends JPanel implements PropertyChangeListener
             this.repaint();
         }
     }
+
     /**
      * Méthode permettant de mettre à jour le panneau d'information
      * @param g Graphics
-     * @Modif ajout du score
-     * @Modif ajout de la vitesse
+     * @since modification pour extension score
+     * @since modification pour extension vitesse
      */
     @Override
     protected void paintComponent(Graphics g){

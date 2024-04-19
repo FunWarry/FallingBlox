@@ -8,18 +8,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseWheelEvent;
 
 /**
- * Classe permettant de gérer l'échange de pièce
+ * Classe permettant de gérer l'échange de pièce actuelle avec la pièce suivante
  * @since extension échange piece
  */
 public class EchangePiece extends MouseAdapter {
 
+    /**
+     * Vue du puits
+     */
     private VuePuits vuePuits;
 
+    /**
+     * Puits
+     */
     private Puits puits;
 
     /**
      * Constructeur de la classe PieceDeplacement
-     *
      * @param vuePuits vue du puits
      */
     public EchangePiece(VuePuits vuePuits) {
